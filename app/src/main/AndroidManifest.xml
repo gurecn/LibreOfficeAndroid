@@ -87,6 +87,17 @@
                 <data android:mimeType="image/x-wmf" />
                 <data android:mimeType="image/svg+xml" />
 
+
+                <data android:mimeType="image/gif" />
+                <data android:mimeType="image/jpg" />
+                <data android:mimeType="image/jpeg" />
+                <data android:mimeType="image/png" />
+                <data android:mimeType="application/vnd.visio2013" />
+                <data android:mimeType="application/octet-stream" />
+                <data android:mimeType="application/vnd.ms-visio.drawing" />
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="application/pdf" />
+
             </intent-filter>
         </activity>
 

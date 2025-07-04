@@ -389,8 +389,7 @@ class LOKitTileProvider implements TileProvider {
      */
     @Override
     public void onSwipeLeft() {
-        if (mDocument.getDocumentType() == Document.DOCTYPE_PRESENTATION &&
-                getCurrentPartNumber() < getPartsCount()-1) {
+        if (getCurrentPartNumber() < getPartsCount()-1) {
             LOKitShell.sendChangePartEvent(getCurrentPartNumber()+1);
         }
     }
@@ -400,8 +399,7 @@ class LOKitTileProvider implements TileProvider {
      */
     @Override
     public void onSwipeRight() {
-        if (mDocument.getDocumentType() == Document.DOCTYPE_PRESENTATION &&
-                getCurrentPartNumber() > 0) {
+        if (getCurrentPartNumber() > 0) {
             LOKitShell.sendChangePartEvent(getCurrentPartNumber()-1);
         }
     }

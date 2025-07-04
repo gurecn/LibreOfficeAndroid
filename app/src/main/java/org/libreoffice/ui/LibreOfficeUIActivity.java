@@ -109,6 +109,15 @@ public class LibreOfficeUIActivity extends AppCompatActivity implements Settings
             "image/x-svm",
             "image/x-wmf",
             "image/svg+xml",
+            "image/gif",
+            "image/jpg",
+            "image/jpeg",
+            "image/png",
+            "application/vnd.visio2013",
+            "application/octet-stream",
+            "application/vnd.ms-visio.drawing",
+            "text/plain",
+            "application/pdf",
     };
 
     private static final int REQUEST_CODE_OPEN_FILECHOOSER = 12345;
