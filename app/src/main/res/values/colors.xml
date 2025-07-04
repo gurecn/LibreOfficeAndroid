@@ -17,6 +17,7 @@
     <color name="fontBlue">#0000FF</color>
     <color name="fontPurple">#990099</color>
     <color name="fontPink">#FF00FF</color>
+    <color name="white">#ffffff</color>
     <integer-array name="fontcolors">
         <item>@color/fontBlack</item>
         <item>@color/fontDarkRed</item>

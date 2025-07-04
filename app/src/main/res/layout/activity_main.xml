@@ -5,7 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#fff"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:clipToPadding="true"
     tools:context="org.libreoffice.LibreOfficeMainActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -25,10 +27,11 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:elevation="3dp"
+                    android:elevation="0.5dp"
+                    android:background="@color/white"
                     app:theme="@style/LibreOfficeTheme.Toolbar"
                     tools:theme="@style/LibreOfficeTheme.Toolbar"
-                    app:popupTheme="@style/LibreOfficeTheme" />
+                    app:popupTheme="@style/AppBaseTheme" />
 
             </com.google.android.material.appbar.AppBarLayout>
 
