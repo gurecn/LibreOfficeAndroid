@@ -171,17 +171,11 @@ public class LibreOfficeUIActivity extends AppCompatActivity implements Settings
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-
-        if (actionBar != null) {
-            actionBar.setIcon(R.mipmap.ic_launcher);
-        }
-
         editFAB = findViewById(R.id.editFAB);
         editFAB.setOnClickListener(this);
         // allow creating new docs only when experimental editing is enabled
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final boolean bEditingEnabled = BuildConfig.ALLOW_EDITING && preferences.getBoolean(LibreOfficeMainActivity.ENABLE_EXPERIMENTAL_PREFS_KEY, false);
+        final boolean bEditingEnabled = preferences.getBoolean(LibreOfficeMainActivity.ENABLE_EXPERIMENTAL_PREFS_KEY, false);
         editFAB.setVisibility(bEditingEnabled ? View.VISIBLE : View.INVISIBLE);
 
         impressFAB = findViewById(R.id.newImpressFAB);

@@ -22,11 +22,6 @@ public class SettingsActivity extends Activity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.libreoffice_preferences);
-            if(!BuildConfig.ALLOW_EDITING) {
-                PreferenceGroup generalGroup = (PreferenceGroup) findPreference("PREF_CATEGORY_GENERAL");
-                generalGroup.removePreference(generalGroup.findPreference("ENABLE_EXPERIMENTAL"));
-                generalGroup.removePreference(generalGroup.findPreference("ENABLE_DEVELOPER"));
-            }
         }
 
         @Override

@@ -37,8 +37,8 @@
 
     </group>
 
-    <group android:id="@+id/group_misc_actions"
-           tools:visible="true"
+    <group
+        tools:visible="true"
            android:visible="false">
 
         <item android:id="@+id/action_save"

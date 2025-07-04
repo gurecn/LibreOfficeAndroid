@@ -9,7 +9,6 @@
     tools:context="org.libreoffice.LibreOfficeMainActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -19,7 +18,6 @@
             android:orientation="vertical">
 
             <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/appBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -87,7 +85,6 @@
                     android:visibility="gone"/>
 
                 <RelativeLayout
-                    android:id="@+id/gecko_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -104,9 +101,7 @@
                         android:id="@+id/text_cursor_view"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"/>
-
                 </RelativeLayout>
-
             </RelativeLayout>
 
         </LinearLayout>
@@ -123,17 +118,11 @@
             android:gravity="center">
 
             <ProgressBar
-                android:id="@+id/progressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:indeterminate="true"/>
 
         </RelativeLayout>
-
-        <!--What's the use of this view? Can it be removed?-->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

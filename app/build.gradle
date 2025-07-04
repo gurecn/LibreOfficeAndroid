@@ -29,19 +29,13 @@ android {
             minifyEnabled true
             shrinkResources true
             manifestPlaceholders = [installLocation: "preferExternal"]
-            buildConfigField "boolean", "ALLOW_EDITING", "false"
-            buildConfigField "String", "BUILD_ID_SHORT", '"2cac2ee38445"'
-            buildConfigField "String", "PRIVACY_POLICY_URL", '"undefined"'
-            buildConfigField "String", "VENDOR", '"gure"'
+            buildConfigField "String", "VENDOR", '"gurecn"'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled true
             shrinkResources true
             manifestPlaceholders = [installLocation: "auto"]
-            buildConfigField "boolean", "ALLOW_EDITING", "false"
-            buildConfigField "String", "BUILD_ID_SHORT", '"2cac2ee38445"'
-            buildConfigField "String", "PRIVACY_POLICY_URL", '"undefined"'
             buildConfigField "String", "VENDOR", '"gure"'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

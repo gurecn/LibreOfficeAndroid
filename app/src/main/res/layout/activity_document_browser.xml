@@ -51,7 +51,6 @@
                 android:showDividers="middle">
 
                 <TextView
-                    android:id="@+id/header_browser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -73,7 +72,6 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/header_recents"
                     android:text="@string/title_recents"
                     android:gravity="center_vertical"
                     android:textSize="14sp"
@@ -121,7 +119,6 @@
         tools:visibility="visible">
 
         <TextView
-            android:id="@+id/newWriterTextView"
             style="@style/NewDocumentTextView"
             android:layout_marginBottom="@dimen/new_doc_fab_tweak_bottom"
             android:layout_marginTop="@dimen/new_doc_fab_tweak_top"
@@ -153,7 +150,6 @@
         tools:visibility="visible">
 
         <TextView
-            android:id="@+id/newImpressTextView"
             style="@style/NewDocumentTextView"
             android:layout_marginBottom="@dimen/new_doc_fab_tweak_bottom"
             android:layout_marginTop="@dimen/new_doc_fab_tweak_top"
@@ -185,7 +181,6 @@
         app:layout_constraintRight_toRightOf="@id/editFAB">
 
         <TextView
-            android:id="@+id/newCalcTextView"
             style="@style/NewDocumentTextView"
             android:layout_marginBottom="@dimen/new_doc_fab_tweak_bottom"
             android:layout_marginTop="@dimen/new_doc_fab_tweak_top"
@@ -217,7 +212,6 @@
         app:layout_constraintRight_toRightOf="@id/editFAB">
 
         <TextView
-            android:id="@+id/newDrawTextView"
             style="@style/NewDocumentTextView"
             android:layout_marginBottom="@dimen/new_doc_fab_tweak_bottom"
             android:layout_marginTop="@dimen/new_doc_fab_tweak_top"

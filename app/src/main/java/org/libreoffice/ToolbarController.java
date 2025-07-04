@@ -134,7 +134,6 @@ public class ToolbarController implements Toolbar.OnMenuItemClickListener {
             @Override
             public void run() {
                 mMainMenu.setGroupVisible(R.id.group_edit_actions, false);
-                mToolbarTop.setNavigationIcon(R.mipmap.ic_launcher);
                 mToolbarTop.setLogo(null);
                 setEditModeOn(false);
                 mContext.hideBottomToolbar();

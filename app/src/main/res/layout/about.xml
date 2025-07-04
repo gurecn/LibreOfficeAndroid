@@ -19,7 +19,6 @@
         tools:text="Version: x.x.x.x\nBuild ID: 000000000000" />
 
     <TextView
-        android:id="@+id/about_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_description"
