@@ -133,7 +133,9 @@ public class LibreOfficeUIActivity extends AppCompatActivity implements Settings
         super.onCreate(savedInstanceState);
         readPreferences();
         SettingsListenerModel.getInstance().setListener(this);
-        createUI();
+        setContentView(R.layout.activity_document_browser);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         fabOpenAnimation = AnimationUtils.loadAnimation(this, R.anim.fab_open);
         fabCloseAnimation = AnimationUtils.loadAnimation(this, R.anim.fab_close);
     }
@@ -141,6 +143,7 @@ public class LibreOfficeUIActivity extends AppCompatActivity implements Settings
     @Override
     protected void onStart() {
         super.onStart();
+        createUI();
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_WRITE_EXTERNAL_STORAGE);
         }
@@ -152,9 +155,6 @@ public class LibreOfficeUIActivity extends AppCompatActivity implements Settings
     }
 
     public void createUI() {
-        setContentView(R.layout.activity_document_browser);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         editFAB = findViewById(R.id.editFAB);
         editFAB.setOnClickListener(this);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -303,13 +303,6 @@ public class LibreOfficeUIActivity extends AppCompatActivity implements Settings
     @Override
     public void settingsPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         readPreferences();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(LOGTAG, "onResume");
-        createUI();
     }
 
     private void addDocumentToRecents(Uri fileUri) {
