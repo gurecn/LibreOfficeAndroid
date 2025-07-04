@@ -5,7 +5,6 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.Log;
 import android.view.KeyEvent;
-
 import org.libreoffice.canvas.SelectionHandle;
 import org.mozilla.gecko.ZoomConstraints;
 import org.mozilla.gecko.gfx.CairoImage;
@@ -13,20 +12,14 @@ import org.mozilla.gecko.gfx.ComposedTileLayer;
 import org.mozilla.gecko.gfx.GeckoLayerClient;
 import org.mozilla.gecko.gfx.ImmutableViewportMetrics;
 import org.mozilla.gecko.gfx.SubTile;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/*
- * Thread that communicates with LibreOffice through LibreOfficeKit JNI interface. The thread
- * consumes events from other threads (mainly the UI thread) and acts accordingly.
- */
-class LOKitThread extends Thread {
+
+public class LOKitThread extends Thread {
     private static final String LOGTAG = LOKitThread.class.getSimpleName();
-
     private final LinkedBlockingQueue<LOEvent> mEventQueue = new LinkedBlockingQueue<LOEvent>();
-
     private TileProvider mTileProvider;
     private InvalidationHandler mInvalidationHandler;
     private ImmutableViewportMetrics mViewportMetrics;
@@ -446,4 +439,4 @@ class LOKitThread extends Thread {
     }
 }
 
-/* vim:set shiftwidth=4 softtabstop=4 expandtab: */
+

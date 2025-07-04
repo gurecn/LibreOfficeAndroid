@@ -765,4 +765,4 @@ public class InvalidationHandler implements Document.MessageCallback, Office.Mes
     }
 }
 
-/* vim:set shiftwidth=4 softtabstop=4 expandtab: */
+

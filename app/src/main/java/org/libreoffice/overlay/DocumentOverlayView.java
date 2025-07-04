@@ -541,4 +541,4 @@ public class DocumentOverlayView extends View implements View.OnTouchListener {
     }
 }
 
-/* vim:set shiftwidth=4 softtabstop=4 expandtab: */
+

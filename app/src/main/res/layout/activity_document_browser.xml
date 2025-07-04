@@ -133,7 +133,7 @@
             android:clickable="true"
             app:backgroundTint="@color/background_floating"
             app:fabSize="mini"
-            app:srcCompat="@drawable/writer"
+            app:srcCompat="@drawable/ic_writer"
             app:useCompatPadding="true" />
 
     </LinearLayout>
@@ -164,7 +164,7 @@
             android:clickable="true"
             app:backgroundTint="@color/background_floating"
             app:fabSize="mini"
-            app:srcCompat="@drawable/impress"
+            app:srcCompat="@drawable/ic_impress"
             app:useCompatPadding="true" />
 
     </LinearLayout>
@@ -195,7 +195,7 @@
             android:clickable="true"
             app:backgroundTint="@color/background_floating"
             app:fabSize="mini"
-            app:srcCompat="@drawable/calc"
+            app:srcCompat="@drawable/ic_calc"
             app:useCompatPadding="true" />
 
     </LinearLayout>
@@ -226,7 +226,7 @@
             android:clickable="true"
             app:backgroundTint="@color/background_floating"
             app:fabSize="mini"
-            app:srcCompat="@drawable/draw"
+            app:srcCompat="@drawable/ic_draw"
             app:useCompatPadding="true" />
 
     </LinearLayout>

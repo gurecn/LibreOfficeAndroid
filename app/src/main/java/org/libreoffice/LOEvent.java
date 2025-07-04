@@ -166,4 +166,4 @@ public class LOEvent implements Comparable<LOEvent> {
 
 }
 
-/* vim:set shiftwidth=4 softtabstop=4 expandtab: */
+

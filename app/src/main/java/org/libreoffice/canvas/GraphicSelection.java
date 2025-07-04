@@ -284,4 +284,4 @@ public class GraphicSelection extends CommonCanvasElement {
         EXTEND
     }
 }
-/* vim:set shiftwidth=4 softtabstop=4 expandtab: */
+

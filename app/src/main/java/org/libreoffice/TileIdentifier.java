@@ -79,4 +79,4 @@ public class TileIdentifier {
     }
 }
 
-/* vim:set shiftwidth=4 softtabstop=4 expandtab: */
+

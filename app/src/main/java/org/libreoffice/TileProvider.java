@@ -194,4 +194,4 @@ public interface TileProvider {
     void setDocumentSize(int pageWidth, int pageHeight);
 }
 
-/* vim:set shiftwidth=4 softtabstop=4 expandtab: */
+

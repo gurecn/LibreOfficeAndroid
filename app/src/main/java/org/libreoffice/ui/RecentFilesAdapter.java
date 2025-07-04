@@ -1,5 +1,6 @@
 package org.libreoffice.ui;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,62 +8,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import org.libreoffice.R;
-
 import java.util.List;
 
 class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.ViewHolder> {
 
     private final LibreOfficeUIActivity mActivity;
     private final List<RecentFile> recentFiles;
-
     RecentFilesAdapter(LibreOfficeUIActivity activity, List<RecentFile> recentFiles) {
         this.mActivity = activity;
         this.recentFiles = recentFiles;
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View item = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_recent_files, parent, false);
+        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recent_files, parent, false);
         return new ViewHolder(item);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final RecentFile entry = recentFiles.get(position);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mActivity.openDocument(entry.getUri());
-            }
-        });
-
+        holder.itemView.setOnClickListener(view -> mActivity.openDocument(entry.getUri()));
         final String filename = entry.getDisplayName();
         holder.textView.setText(filename);
-
-        int compoundDrawableInt = 0;
-
-        switch (FileUtilities.getType(filename)) {
-            case FileUtilities.DOC:
-                compoundDrawableInt = R.drawable.writer;
-                break;
-            case FileUtilities.CALC:
-                compoundDrawableInt = R.drawable.calc;
-                break;
-            case FileUtilities.DRAWING:
-                compoundDrawableInt = R.drawable.draw;
-                break;
-            case FileUtilities.IMPRESS:
-                compoundDrawableInt = R.drawable.impress;
-                break;
-        }
-
-        // set icon if known filetype was detected
-        if (compoundDrawableInt != 0)
-            holder.imageView.setImageDrawable(ContextCompat.getDrawable(mActivity, compoundDrawableInt));
+        int compoundDrawableInt = switch (FileUtilities.getType(filename)) {
+            case FileUtilities.CALC -> R.drawable.ic_calc;
+            case FileUtilities.DRAWING -> R.drawable.ic_draw;
+            case FileUtilities.IMPRESS -> R.drawable.ic_impress;
+            case FileUtilities.PDF -> R.drawable.ic_pdf;
+            default -> R.drawable.ic_writer;
+        };
+        holder.imageView.setImageDrawable(ContextCompat.getDrawable(mActivity, compoundDrawableInt));
     }
 
     @Override
@@ -70,7 +48,7 @@ class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.ViewHol
         return recentFiles.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView textView;
         ImageView imageView;

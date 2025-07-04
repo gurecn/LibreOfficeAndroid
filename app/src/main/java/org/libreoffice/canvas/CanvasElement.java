@@ -33,4 +33,3 @@ public interface CanvasElement {
      */
     void setVisible(boolean visible);
 }
-/* vim:set shiftwidth=4 softtabstop=4 expandtab: */

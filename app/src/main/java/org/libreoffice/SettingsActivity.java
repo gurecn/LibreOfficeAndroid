@@ -47,4 +47,4 @@ public class SettingsActivity extends Activity {
         }
     }
 }
-/* vim:set shiftwidth=4 softtabstop=4 expandtab: */
+

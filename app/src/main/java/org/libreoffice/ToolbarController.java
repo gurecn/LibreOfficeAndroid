@@ -260,4 +260,4 @@ public class ToolbarController implements Toolbar.OnMenuItemClickListener {
 
 }
 
-/* vim:set shiftwidth=4 softtabstop=4 expandtab: */
+

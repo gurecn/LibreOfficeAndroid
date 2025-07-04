@@ -18,6 +18,7 @@ public class FileUtilities {
     static final int CALC = 1;
     static final int IMPRESS = 2;
     static final int DRAWING = 3;
+    static final int PDF = 4;
 
     static final int UNKNOWN = 10;
 
@@ -32,6 +33,7 @@ public class FileUtilities {
         // Please keep this in sync with AndroidManifest.xml
         // and 'SUPPORTED_MIME_TYPES' in LibreOfficeUIActivity.java
 
+        mExtnMap.put(".pdf", PDF);
         // ODF
         mExtnMap.put(".odt", DOC);
         mExtnMap.put(".odg", DRAWING);
@@ -147,4 +149,4 @@ public class FileUtilities {
     }
 }
 
-/* vim:set shiftwidth=4 softtabstop=4 expandtab: */
+

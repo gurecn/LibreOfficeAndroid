@@ -158,4 +158,4 @@ public class LOKitShell {
     }
 }
 
-/* vim:set shiftwidth=4 softtabstop=4 expandtab: */
+

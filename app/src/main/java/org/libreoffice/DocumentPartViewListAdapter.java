@@ -39,4 +39,4 @@ public class DocumentPartViewListAdapter extends ArrayAdapter<DocumentPartView> 
     }
 }
 
-/* vim:set shiftwidth=4 softtabstop=4 expandtab: */
+
