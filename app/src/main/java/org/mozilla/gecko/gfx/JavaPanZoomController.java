@@ -2,7 +2,6 @@ package org.mozilla.gecko.gfx;
 
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.os.Build;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.InputDevice;
@@ -16,12 +15,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.lang.StrictMath;
 
-/*
- * Handles the kinetic scrolling and zooming physics for a layer controller.
- *
- * Many ideas are from Joe Hewitt's Scrollability:
- *   https://github.com/joehewitt/scrollability/
- */
 class JavaPanZoomController
         extends GestureDetector.SimpleOnGestureListener
         implements PanZoomController, SimpleScaleGestureDetector.SimpleScaleGestureListener
@@ -73,7 +66,6 @@ class JavaPanZoomController
     private final Axis mX;
     private final Axis mY;
     private final TouchEventHandler mTouchEventHandler;
-    private final Thread mMainThread;
     private final LibreOfficeMainActivity mContext;
 
     /* The timer that handles flings or bounces. */
@@ -98,10 +90,6 @@ class JavaPanZoomController
         mX = new AxisX(mSubscroller);
         mY = new AxisY(mSubscroller);
         mTouchEventHandler = new TouchEventHandler(view.getContext(), view, this);
-
-        mMainThread = mContext.getMainLooper().getThread();
-        checkMainThread();
-
         setState(PanZoomState.NOTHING);
     }
 
@@ -127,14 +115,6 @@ class JavaPanZoomController
         return mTarget.getViewportMetrics();
     }
 
-    // for debugging bug 713011; it can be taken out once that is resolved.
-    private void checkMainThread() {
-        if (mMainThread != Thread.currentThread()) {
-            // log with full stack trace
-            Log.e(LOGTAG, "Uh-oh, we're running on the wrong thread!", new Exception());
-        }
-    }
-
     /** This function MUST be called on the UI thread */
     public boolean onMotionEvent(MotionEvent event) {
         if ((event.getSource() & InputDevice.SOURCE_CLASS_MASK) == InputDevice.SOURCE_CLASS_POINTER
@@ -149,14 +129,20 @@ class JavaPanZoomController
         return mTouchEventHandler.handleEvent(event);
     }
 
-    boolean handleEvent(MotionEvent event) {
+    void handleEvent(MotionEvent event) {
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
-        case MotionEvent.ACTION_DOWN:   return handleTouchStart(event);
-        case MotionEvent.ACTION_MOVE:   return handleTouchMove(event);
-        case MotionEvent.ACTION_UP:     return handleTouchEnd(event);
-        case MotionEvent.ACTION_CANCEL: return handleTouchCancel(event);
+        case MotionEvent.ACTION_DOWN:
+            handleTouchStart(event);
+            return;
+        case MotionEvent.ACTION_MOVE:
+            handleTouchMove(event);
+            return;
+        case MotionEvent.ACTION_UP:
+            handleTouchEnd(event);
+            return;
+        case MotionEvent.ACTION_CANCEL:
+            handleTouchCancel(event);
         }
-        return false;
     }
 
     /** This function MUST be called on the UI thread */
@@ -166,7 +152,6 @@ class JavaPanZoomController
 
     /** This function must be called from the UI thread. */
     public void abortAnimation() {
-        checkMainThread();
         // this happens when gecko changes the viewport on us or if the device is rotated.
         // if that's the case, abort any animation in progress and re-zoom so that the page
         // snaps to edges. for other cases (where the user's finger(s) are down) don't do
@@ -195,7 +180,6 @@ class JavaPanZoomController
 
     /** This function must be called on the UI thread. */
     void startingNewEventBlock(MotionEvent event, boolean waitingForTouchListeners) {
-        checkMainThread();
         mSubscroller.cancel();
         if (waitingForTouchListeners && (event.getAction() & MotionEvent.ACTION_MASK) == MotionEvent.ACTION_DOWN) {
             // this is the first touch point going down, so we enter the pending state
@@ -207,7 +191,6 @@ class JavaPanZoomController
 
     /** This function must be called on the UI thread. */
     void preventedTouchFinished() {
-        checkMainThread();
         if (mState == PanZoomState.WAITING_LISTENERS) {
             // if we enter here, we just finished a block of events whose default actions
             // were prevented by touch listeners. Now there are no touch points left, so
@@ -234,7 +217,7 @@ class JavaPanZoomController
      * Panning/scrolling
      */
 
-    private boolean handleTouchStart(MotionEvent event) {
+    private void handleTouchStart(MotionEvent event) {
         // user is taking control of movement, so stop
         // any auto-movement we have going
         stopAnimationTimer();
@@ -251,7 +234,7 @@ class JavaPanZoomController
         case NOTHING:
         case WAITING_LISTENERS:
             startTouch(event.getX(0), event.getY(0), event.getEventTime());
-            return false;
+            return;
         case TOUCHING:
         case PANNING:
         case PANNING_LOCKED:
@@ -259,19 +242,17 @@ class JavaPanZoomController
         case PANNING_HOLD_LOCKED:
         case PINCHING:
             Log.e(LOGTAG, "Received impossible touch down while in " + mState);
-            return false;
+            return;
         }
         Log.e(LOGTAG, "Unhandled case " + mState + " in handleTouchStart");
-        return false;
     }
 
-    private boolean handleTouchMove(MotionEvent event) {
+    private void handleTouchMove(MotionEvent event) {
         if (mState == PanZoomState.PANNING_LOCKED || mState == PanZoomState.PANNING) {
             if (getVelocity() > 18.0f) {
                 mContext.hideSoftKeyboard();
             }
         }
-
         switch (mState) {
         case FLING:
         case BOUNCE:
@@ -283,41 +264,40 @@ class JavaPanZoomController
         case NOTHING:
             // may happen if user double-taps and drags without lifting after the
             // second tap. ignore the move if this happens.
-            return false;
+            return;
 
         case TOUCHING:
             // Don't allow panning if there is an element in full-screen mode. See bug 775511.
             if (mTarget.isFullScreen() || panDistance(event) < PAN_THRESHOLD) {
-                return false;
+                return;
             }
             cancelTouch();
             startPanning(event.getX(0), event.getY(0), event.getEventTime());
             track(event);
-            return true;
+            return;
 
         case PANNING_HOLD_LOCKED:
             setState(PanZoomState.PANNING_LOCKED);
             // fall through
         case PANNING_LOCKED:
             track(event);
-            return true;
+            return;
 
         case PANNING_HOLD:
             setState(PanZoomState.PANNING);
             // fall through
         case PANNING:
             track(event);
-            return true;
+            return;
 
         case PINCHING:
             // scale gesture listener will handle this
-            return false;
+            return;
         }
         Log.e(LOGTAG, "Unhandled case " + mState + " in handleTouchMove");
-        return false;
     }
 
-    private boolean handleTouchEnd(MotionEvent event) {
+    private void handleTouchEnd(MotionEvent event) {
 
         switch (mState) {
         case FLING:
@@ -330,14 +310,14 @@ class JavaPanZoomController
         case NOTHING:
             // may happen if user double-taps and drags without lifting after the
             // second tap. ignore if this happens.
-            return false;
+            return;
 
         case TOUCHING:
             // the switch into TOUCHING might have happened while the page was
             // snapping back after overscroll. we need to finish the snap if that
             // was the case
             bounce();
-            return false;
+            return;
 
         case PANNING:
         case PANNING_LOCKED:
@@ -345,17 +325,16 @@ class JavaPanZoomController
         case PANNING_HOLD_LOCKED:
             setState(PanZoomState.FLING);
             fling();
-            return true;
+            return;
 
         case PINCHING:
             setState(PanZoomState.NOTHING);
-            return true;
+            return;
         }
         Log.e(LOGTAG, "Unhandled case " + mState + " in handleTouchEnd");
-        return false;
     }
 
-    private boolean handleTouchCancel(MotionEvent event) {
+    private void handleTouchCancel(MotionEvent event) {
         cancelTouch();
 
         if (mState == PanZoomState.WAITING_LISTENERS) {
@@ -365,12 +344,11 @@ class JavaPanZoomController
             // to being in NOTHING with the exception of possibly being in overscroll.
             // so here we don't want to do anything right now; the overscroll will be
             // corrected in preventedTouchFinished().
-            return false;
+            return;
         }
 
         // ensure we snap back if we're overscrolled
         bounce();
-        return false;
     }
 
     private boolean handlePointerScroll(MotionEvent event) {
@@ -516,7 +494,7 @@ class JavaPanZoomController
 
         mAnimationTimer = new Timer("Animation Timer");
         mAnimationRunnable = runnable;
-        mAnimationTimer.scheduleAtFixedRate(new TimerTask() {
+        mAnimationTimer.schedule(new TimerTask() {
             @Override
             public void run() { mTarget.post(runnable); }
         }, 0, (int)Axis.MS_PER_FRAME);
@@ -566,7 +544,7 @@ class JavaPanZoomController
         }
     }
 
-    private abstract class AnimationRunnable implements Runnable {
+    private abstract static class AnimationRunnable implements Runnable {
         private boolean mAnimationTerminated;
 
         /* This should always run on the UI thread */
@@ -700,7 +678,7 @@ class JavaPanZoomController
     }
 
     private void finishAnimation() {
-        checkMainThread();
+        
 
         stopAnimationTimer();
 
@@ -900,18 +878,16 @@ class JavaPanZoomController
     }
 
     public boolean getRedrawHint() {
-        switch (mState) {
-            case PINCHING:
-            case ANIMATED_ZOOM:
-            case BOUNCE:
+        return switch (mState) {
+            case PINCHING, ANIMATED_ZOOM, BOUNCE ->
                 // don't redraw during these because the zoom is (or might be, in the case
                 // of BOUNCE) be changing rapidly and gecko will have to redraw the entire
                 // display port area. we trigger a force-redraw upon exiting these states.
-                return false;
-            default:
+                    false;
+            default ->
                 // allow redrawing in other states
-                return true;
-        }
+                    true;
+        };
     }
 
     @Override
@@ -1065,7 +1041,7 @@ class JavaPanZoomController
 
     /** This function must be called from the UI thread. */
     public void abortPanning() {
-        checkMainThread();
+        
         bounce();
     }
 

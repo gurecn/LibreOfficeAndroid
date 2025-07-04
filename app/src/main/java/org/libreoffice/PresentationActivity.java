@@ -36,13 +36,13 @@ public class PresentationActivity extends AppCompatActivity {
 
         // set up WebView
         mWebView = findViewById(R.id.presentation_view);
-        mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
+//        mWebView.getSettings().setJavaScriptEnabled(true);
+//        mWebView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                return true;
+//            }
+//        });
 
         // set up buttons within presentation_gesture_view
         ImageButton prevButton = findViewById(R.id.slide_show_nav_prev);
@@ -69,14 +69,14 @@ public class PresentationActivity extends AppCompatActivity {
         });
 
         // set up presentation_gesture_view
-        mGestureView = findViewById(R.id.presentation_gesture_view);
-        final GestureDetectorCompat gestureDetector = new GestureDetectorCompat(this, new PresentationGestureViewListener());
-        mGestureView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return gestureDetector.onTouchEvent(event);
-            }
-        });
+//        mGestureView = findViewById(R.id.presentation_gesture_view);
+//        final GestureDetectorCompat gestureDetector = new GestureDetectorCompat(this, new PresentationGestureViewListener());
+//        mGestureView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                return gestureDetector.onTouchEvent(event);
+//            }
+//        });
 
         // load url
         mWebView.loadUrl(filePath);

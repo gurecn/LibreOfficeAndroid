@@ -54,8 +54,7 @@
         <item android:id="@+id/action_exportToPDF"
             android:title="@string/action_exportToPDF"
             android:orderInCategory="100"
-            android:visible="true"
-            />
+            android:visible="true" />
 
         <item android:id="@+id/action_print"
             android:title="@string/action_print"
@@ -90,8 +89,8 @@
 
         <item android:id="@+id/action_add_slide"
             android:title="@string/action_add_slide"
-            android:orderInCategory="100"
-            android:visible="false" />
+            android:orderInCategory="100" />
+
         <item android:id="@+id/action_rename_slide"
             android:title="@string/action_rename_slide"
             android:orderInCategory="100"
