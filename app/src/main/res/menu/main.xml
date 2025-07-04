@@ -11,25 +11,25 @@
               android:title="@string/action_undo"
               android:icon="@drawable/ic_undo"
               android:orderInCategory="100"
-              app:showAsAction="always"/>
+              app:showAsAction="ifRoom"/>
 
         <item android:id="@+id/action_redo"
               android:title="@string/action_redo"
               android:icon="@drawable/ic_redo"
               android:orderInCategory="100"
-              app:showAsAction="always"/>
+              app:showAsAction="ifRoom"/>
 
         <item android:id="@+id/action_keyboard"
               android:title="@string/action_keyboard"
               android:icon="@drawable/ic_keyboard"
               android:orderInCategory="100"
-              app:showAsAction="always"/>
+              app:showAsAction="ifRoom"/>
 
         <item android:id="@+id/action_format"
             android:title="@string/action_fromat"
             android:icon="@drawable/ic_text_format"
             android:orderInCategory="100"
-            app:showAsAction="always"/>
+            app:showAsAction="ifRoom"/>
 
         <item android:id="@+id/action_UNO_commands"
             android:title="@string/action_UNO_commands"
@@ -109,25 +109,25 @@
 
         <item android:id="@+id/action_back"
             android:title="@string/action_back"
-            app:showAsAction="always"
+            app:showAsAction="ifRoom"
             android:icon="@drawable/ic_arrow_back_24dp"
             android:orderInCategory="1"/>
 
         <item android:id="@+id/action_copy"
             android:title="@string/action_copy"
-            app:showAsAction="always"
+            app:showAsAction="ifRoom"
             android:icon="@drawable/ic_content_copy_24dp"
             android:orderInCategory="2"/>
 
         <item android:id="@+id/action_cut"
             android:title="@string/action_cut"
-            app:showAsAction="always"
+            app:showAsAction="ifRoom"
             android:icon="@drawable/ic_content_cut_24dp"
             android:orderInCategory="3"/>
 
         <item android:id="@+id/action_paste"
             android:title="@string/action_paste"
-            app:showAsAction="always"
+            app:showAsAction="ifRoom"
             android:icon="@drawable/ic_content_paste_24dp"
             android:orderInCategory="4"/>
 
@@ -146,13 +146,5 @@
 
     <item android:id="@+id/action_parts"
           android:title="@string/action_parts"
-          android:orderInCategory="100" />
-
-    <item android:id="@+id/action_about"
-          android:title="@string/action_about"
-          android:orderInCategory="100" />
-
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
           android:orderInCategory="100" />
 </menu>

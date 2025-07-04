@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-feature android:glEsVersion="0x00020000" android:required="true" />
     <uses-feature android:name="android.hardware.usb.host" android:required="false"/>
     <uses-feature android:name="android.hardware.camera" android:required="false"/>
@@ -111,7 +112,8 @@
         </activity>
 
         <activity android:name=".PresentationActivity"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="landscape"
+            tools:ignore="DiscouragedApi">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LibreOfficeMainActivity" />

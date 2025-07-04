@@ -410,29 +410,23 @@ class FormattingController implements View.OnClickListener {
                 mContext.getResources().getString(R.string.compress_photo_max_quality),
                 mContext.getResources().getString(R.string.compress_photo_no_compress)};
         builder.setTitle(mContext.getResources().getString(R.string.compress_photo_title));
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                int compressGrade;
-                switch (which) {
-                    case 0:
-                        compressGrade = 0;
-                        break;
-                    case 1:
-                        compressGrade = 50;
-                        break;
-                    case 2:
-                        compressGrade = 100;
-                        break;
-                    case 3:
-                        compressGrade = -1;
-                        break;
-                    default:
-                        compressGrade = -1;
-                }
-                compressImage(compressGrade);
-                sendInsertGraphic();
+        builder.setItems(options, (dialog, which) -> {
+            int compressGrade;
+            switch (which) {
+                case 0:
+                    compressGrade = 0;
+                    break;
+                case 1:
+                    compressGrade = 50;
+                    break;
+                case 2:
+                    compressGrade = 100;
+                    break;
+                default:
+                    compressGrade = -1;
             }
+            compressImage(compressGrade);
+            sendInsertGraphic();
         });
         builder.show();
     }

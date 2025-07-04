@@ -535,6 +535,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:importantForAutofill="no"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
                 android:inputType="textNoSuggestions"
@@ -545,6 +546,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:importantForAutofill="no"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
                 android:inputType="textNoSuggestions"
@@ -555,7 +557,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:maxLines="1"
+                android:importantForAutofill="no" android:maxLines="1"
                 android:scrollHorizontally="true"
                 android:inputType="textNoSuggestions"
                 android:hint="@string/UNO_commands_string_value_hint" />
@@ -565,6 +567,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/image_button_background"
+                android:contentDescription="@string/UNO_commands_string_parent_value_hint"
                 android:padding="10dp"
                 app:srcCompat="@drawable/ic_add_24dp" />
 

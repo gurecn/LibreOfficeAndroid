@@ -213,7 +213,7 @@ public class LayerView extends FrameLayout {
     public Bitmap getDrawable(String name) {
         Context context = getContext();
         Resources resources = context.getResources();
-        String packageName = resources.getResourcePackageName(R.id.dummy_id_for_package_name_resolution);
+        String packageName = context.getPackageName();
         int resourceID = resources.getIdentifier(name, "drawable", packageName);
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false;

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <WebView
@@ -18,8 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:contentDescription="@string/previous"
             android:src="@drawable/ic_search_direction_up" />
 
         <ImageButton
@@ -28,17 +29,18 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
+            android:contentDescription="@string/next"
             android:src="@drawable/ic_search_direction_down" />
 
         <Button
             android:id="@+id/slide_show_nav_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="@string/slideshow_action_back" />
+            android:contentDescription="@string/slideshow_action_back"
+            android:text="@string/slideshow_action_back"
+            tools:ignore="RelativeOverlap" />
 
     </RelativeLayout>
 

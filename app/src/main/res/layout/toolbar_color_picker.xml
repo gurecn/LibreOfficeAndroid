@@ -18,56 +18,47 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="10dp"
+        android:gravity="bottom"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
-
             <ImageButton
                 android:id="@+id/button_go_back_color_picker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/image_button_background"
+                android:contentDescription="@string/action_back"
                 app:srcCompat="@drawable/ic_arrow_back_24dp" />
 
             <Button
                 android:id="@+id/button_auto_color"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/image_button_background"
                 android:text="@string/automatic"
-                app:drawableLeftCompat="@drawable/ic_auto_color" />
-
+                app:drawableLeftCompat="@drawable/ic_auto_color"
+                tools:ignore="RelativeOverlap" />
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/fontColorView"
-            >
-
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         </androidx.recyclerview.widget.RecyclerView>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fontColorViewSub"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/fontColorViewSub"
-            android:layout_marginTop="20dp"
-            android:layout_below="@id/fontColorView"
-            android:layout_alignParentBottom="true">
-
+            android:layout_marginTop="20dp">
         </androidx.recyclerview.widget.RecyclerView>
-
-
     </LinearLayout>
-
-
-
 </LinearLayout>

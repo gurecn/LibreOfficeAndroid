@@ -137,4 +137,6 @@
     <string name="font_color">Font Color</string>
     <string name="action_rename_slide">Rename Slide</string>
     <string name="automatic">Automatic</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 </resources>

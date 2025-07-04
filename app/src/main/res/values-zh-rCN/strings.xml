@@ -14,127 +14,129 @@
     <string name="new_spreadsheet">表格</string>
     <string name="new_drawing">绘图</string>
     <string name="default_document_name">无标题</string>
-    <string name="select_file_to_open">Select file to open</string>
-    <string name="search_find_next">Find Next</string>
-    <string name="search_find_previous">Find Previous</string>
-    <string name="file_icon_desc">fileicon</string>
-    <string name="title_recents">Recent files</string>
-    <string name="title_browser">All files</string>
-    <string name="pref_category_general">General</string>
-    <string name="pref_experimental_editing">Experimental Mode</string>
-    <string name="pref_experimental_editing_summary">Enable the experimental editing mode. Use at your own risk.</string>
-    <string name="pref_developer_mode">Developer Mode</string>
-    <string name="pref_developer_mode_summary">Enable developer mode where you can send UNO commands within app. Use at your own risk.</string>
-    <string name="action_about">About</string>
-    <string name="action_parts">Parts</string>
-    <string name="action_settings">Settings</string>
+    <string name="select_file_to_open">打开文件</string>
+    <string name="search_find_next">下一个</string>
+    <string name="search_find_previous">上一个</string>
+    <string name="file_icon_desc">图标</string>
+    <string name="title_recents">最近</string>
+    <string name="title_browser">全部</string>
+    <string name="pref_category_general">通用</string>
+    <string name="pref_experimental_editing">实验特性</string>
+    <string name="pref_experimental_editing_summary">实验特性存在稳定性风险，谨慎开启。</string>
+    <string name="pref_developer_mode">开发模式</string>
+    <string name="pref_developer_mode_summary">开发模式会开启编辑功能，但该功能尚在试验阶段，存在稳定性风险。</string>
+    <string name="action_about">关于</string>
+    <string name="action_parts">章节</string>
+    <string name="action_settings">设置</string>
     <!-- Edit action names -->
-    <string name="action_keyboard">Show keyboard</string>
-    <string name="action_save">Save</string>
-    <string name="action_save_as">Save As…</string>
-    <string name="action_fromat">Enable Format</string>
-    <string name="action_search">Search</string>
-    <string name="action_UNO_commands">Send UNO Cmd</string>
+    <string name="action_keyboard">键盘</string>
+    <string name="action_save">保存</string>
+    <string name="action_save_as">另存为…</string>
+    <string name="action_fromat">格式</string>
+    <string name="action_search">搜索</string>
+    <string name="action_UNO_commands">UNO命令</string>
     <!-- Feedback messages -->
-    <string name="message_saved">Save complete</string>
-    <string name="message_saving">Saving the document…</string>
-    <string name="message_saving_failed">Saving the document failed.</string>
-    <string name="password">Password</string>
-    <string name="action_undo">Undo</string>
-    <string name="action_redo">Redo</string>
+    <string name="action_undo">上一步</string>
+    <string name="action_redo">下一步</string>
     <!-- Save Alert dialog strings -->
-    <string name="save_alert_dialog_title">Save the document before closing?</string>
-    <string name="save_document">SAVE</string>
-    <string name="action_cancel">Cancel</string>
-    <string name="no_save_document">NO</string>
+    <string name="save_alert_dialog_title">是否保存对文档的修改?</string>
+    <string name="save_document">保存</string>
+    <string name="action_cancel">取消</string>
+    <string name="no_save_document">不保存</string>
+    <string name="unable_to_save">保存失败</string>
+    <string name="message_saved">保存成功</string>
+    <string name="message_saving">正在保存…</string>
+    <string name="message_saving_failed">保存失败</string>
+    <string name="action_exportToPDF">另存为PDF</string>
+    <string name="pdf_export_finished">PDF导出完成</string>
+    <string name="unable_to_export_pdf">导出PDF失败</string>
     <!-- Presentation Mode Strings -->
-    <string name="action_presentation">Slide show</string>
-    <string name="action_add_slide">Add Slide</string>
-    <string name="slideshow_action_back">Back</string>
+    <string name="action_presentation">播放</string>
+    <string name="slideshow_action_back">返回</string>
     <!-- Calc Header Menu Strings -->
-    <string name="calc_insert_before">Insert</string>
-    <string name="calc_delete">Delete</string>
-    <string name="calc_hide">Hide</string>
-    <string name="calc_show">Show</string>
-    <string name="calc_optimal_length">Optimal Length</string>
-    <string name="calc_adjust_length">Adjust Length</string>
-    <string name="calc_adjust_height">Adjust Height</string>
-    <string name="calc_adjust_width">Adjust Width</string>
-    <string name="calc_optimal_height">Optimal Height</string>
-    <string name="calc_optimal_width">Optimal Width</string>
-    <string name="calc_optimal_length_confirm">OK</string>
-    <string name="calc_optimal_length_default_text">Enter Extra Length in 100th/mm</string>
-    <string name="calc_alert_double_click_optimal_length">Hint: Double tap on a header sets optimal width/height.</string>
-    <string name="action_add_worksheet">Add Worksheet</string>
+    <string name="calc_insert_before">插入</string>
+    <string name="calc_delete">删除</string>
+    <string name="calc_hide">隐藏</string>
+    <string name="calc_show">显示</string>
+    <string name="calc_optimal_length">调整长度</string>
+    <string name="calc_adjust_length">适应长度</string>
+    <string name="calc_adjust_height">适应高度</string>
+    <string name="calc_adjust_width">适应宽度</string>
+    <string name="calc_optimal_height">调整高度</string>
+    <string name="calc_optimal_width">调整宽度</string>
+    <string name="calc_optimal_length_confirm">确认</string>
+    <string name="calc_optimal_length_default_text">输入长度（单位：100/mm）</string>
+    <string name="calc_alert_double_click_optimal_length">提示：双击表头设置宽度/高度</string>
+    <string name="action_add_worksheet">添加工作表</string>
     <!-- Password dialog strings -->
-    <string name="action_pwd_dialog_OK">OK</string>
-    <string name="action_pwd_dialog_cancel">Cancel</string>
-    <string name="action_pwd_dialog_title">Please enter password</string>
+    <string name="password">密码</string>
+    <string name="action_pwd_dialog_title">输入密码</string>
+    <string name="action_pwd_dialog_OK">确认</string>
+    <string name="action_pwd_dialog_cancel">取消</string>
     <!-- Insert Image Strings -->
-    <string name="take_photo">Take Photo</string>
-    <string name="select_photo">Select Photo</string>
-    <string name="select_photo_title">Select Picture</string>
-    <string name="no_camera_found">No Camera Found</string>
-    <string name="compress_photo_smallest_size">Smallest Size</string>
-    <string name="compress_photo_medium_size">Medium Size</string>
-    <string name="compress_photo_max_quality">Max Quality</string>
-    <string name="compress_photo_no_compress">Don\'t Compress</string>
-    <string name="compress_photo_title">Do you want to compress the photo?</string>
+    <string name="take_photo">拍照</string>
+    <string name="select_photo">照片</string>
+    <string name="select_photo_title">图片</string>
+    <string name="no_camera_found">未发现相机</string>
+    <string name="compress_photo_smallest_size">压缩</string>
+    <string name="compress_photo_medium_size">均衡</string>
+    <string name="compress_photo_max_quality">高清</string>
+    <string name="compress_photo_no_compress">原图</string>
+    <string name="compress_photo_title">请选择图片压缩程度?</string>
     <!-- Clipboard Actions -->
-    <string name="action_copy">Copy</string>
-    <string name="action_paste">Paste</string>
-    <string name="action_cut">Cut</string>
-    <string name="action_back">Back</string>
-    <string name="action_text_copied">Text copied to the clipboard</string>
-    <string name="insert_table">Insert table</string>
-    <string name="select_insert_options">Select insert options:</string>
-    <string name="select_delete_options">Select delete options:</string>
-    <string name="action_rename_worksheet">Rename worksheet</string>
-    <string name="action_delete_worksheet">Delete worksheet</string>
-    <string name="action_delete_slide">Delete slide</string>
-    <string name="name_already_used">Given name is already being used.</string>
-    <string name="part_name_changed">Part name has been changed.</string>
-    <string name="part_deleted">Part has been deleted.</string>
+    <string name="action_copy">复制</string>
+    <string name="action_paste">粘贴</string>
+    <string name="action_cut">剪切</string>
+    <string name="action_back">返回</string>
+    <string name="action_text_copied">复制成功</string>
+    <string name="insert_table">插入表格</string>
+    <string name="select_insert_options">插入:</string>
+    <string name="select_delete_options">删除:</string>
+    <string name="action_rename_worksheet">重命名工作表</string>
+    <string name="action_delete_worksheet">删除工作表</string>
+    <string name="action_add_slide">新增幻灯片</string>
+    <string name="action_rename_slide">重命名幻灯片</string>
+    <string name="action_delete_slide">删除幻灯片</string>
+    <string name="name_already_used">名称冲突</string>
+    <string name="part_name_changed">命名完成</string>
+    <string name="part_deleted">删除完成</string>
     <string-array name="insertrowscolumns">
-        <item>Insert Rows Before</item>
-        <item>Insert Rows After</item>
-        <item>Insert Columns Before</item>
-        <item>Insert Columns After</item>
-        <item>Insert Table</item>
+        <item>行前插入</item>
+        <item>行后插入</item>
+        <item>列前插入</item>
+        <item>列后插入</item>
+        <item>插入表格</item>
     </string-array>
     <string-array name="deleterowcolumns">
-        <item>Delete Rows</item>
-        <item>Delete Columns</item>
-        <item>Delete Table</item>
+        <item>删除行</item>
+        <item>删除列</item>
+        <item>删除表</item>
     </string-array>
     <!-- UNO cmd controller Strings -->
-    <string name="UNO_commands_string_hint">UNO Command</string>
-    <string name="UNO_commands_string_type_hint">Type</string>
-    <string name="UNO_commands_string_value_hint">Value</string>
-    <string name="UNO_commands_string_parent_value_hint">Parent Value</string>
-    <string name="action_exportToPDF">Export To PDF</string>
-    <string name="action_print">Print</string>
-    <string name="tabhost_character">Character</string>
-    <string name="tabhost_paragraph">Paragraph</string>
-    <string name="tabhost_insert">Insert</string>
-    <string name="tabhost_style">Style</string>
-    <string name="alert_ok">OK</string>
-    <string name="alert_cancel">Cancel</string>
-    <string name="current_uno_command">Current UNO command</string>
-    <string name="display_language">Display Language</string>
-    <string name="display_language_summary">Set the default display language</string>
-    <string name="pdf_export_finished">PDF export finished</string>
-    <string name="unable_to_export_pdf">Unable to export to pdf</string>
-    <string name="unable_to_save">Unable to save file</string>
-    <string name="error">Error</string>
-    <string name="enter_part_name">Enter a part name</string>
-    <string name="bmp_null">Bmp is null!</string>
-    <string name="page">Page</string>
-    <string name="sheet">Sheet</string>
-    <string name="slide">Slide</string>
-    <string name="part">Part</string>
-    <string name="highlight_color">Highlight Color</string>
-    <string name="font_color">Font Color</string>
-    <string name="action_rename_slide">Rename Slide</string>
-    <string name="automatic">Automatic</string>
+    <string name="UNO_commands_string_hint">UNO命令</string>
+    <string name="UNO_commands_string_type_hint">类型</string>
+    <string name="UNO_commands_string_value_hint">值</string>
+    <string name="UNO_commands_string_parent_value_hint">父值</string>
+    <string name="action_print">打印</string>
+    <string name="tabhost_character">字体</string>
+    <string name="tabhost_paragraph">对齐</string>
+    <string name="tabhost_insert">插入</string>
+    <string name="tabhost_style">样式</string>
+    <string name="alert_ok">确认</string>
+    <string name="alert_cancel">取消</string>
+    <string name="current_uno_command">当前UNO命令</string>
+    <string name="display_language">语言</string>
+    <string name="display_language_summary">设置默认语言</string>
+    <string name="error">异常</string>
+    <string name="enter_part_name">重命名</string>
+    <string name="bmp_null">图片为空</string>
+    <string name="page">页面</string>
+    <string name="sheet">表格</string>
+    <string name="slide">幻灯片</string>
+    <string name="part">段落</string>
+    <string name="highlight_color">高亮颜色</string>
+    <string name="font_color">字体颜色</string>
+    <string name="automatic">自动配色</string>
+    <string name="next">下一页</string>
+    <string name="previous">上一页</string>
 </resources>

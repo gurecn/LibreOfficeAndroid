@@ -6,10 +6,11 @@
     <ImageButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/font_color"
+        android:focusable="true"
         android:minHeight="35dp"
         android:id="@+id/fontColorBox"
         android:clickable="true"
-        android:scaleType="fitCenter"
-        />
+        android:scaleType="fitCenter" />
 
 </RelativeLayout>

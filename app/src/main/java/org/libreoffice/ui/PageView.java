@@ -49,19 +49,14 @@ public class PageView extends View{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.d(LOGTAG, "Draw");
-        Log.d(LOGTAG, Integer.toString(bmp.getHeight()));
         if( bmp != null ){
-            int horizontalMargin = (int) (canvas.getWidth()*0.1);
-            //int verticalMargin = (int) (canvas.getHeight()*0.1);
-            int verticalMargin = horizontalMargin;
-            canvas.drawBitmap(bmp, new Rect(0, 0, bmp.getWidth(), bmp.getHeight()),
-                    new Rect(horizontalMargin,verticalMargin,canvas.getWidth()-horizontalMargin,
-                        canvas.getHeight()-verticalMargin),
-                    mPaintBlack);//
-        }
-        if( bmp == null)
+            int horizontalMargin = (int) (getWidth()*0.1);
+            canvas.drawBitmap(bmp,
+                    new Rect(0, 0, bmp.getWidth(), bmp.getHeight()),
+                    new Rect(horizontalMargin, horizontalMargin,canvas.getWidth()-horizontalMargin, canvas.getHeight()- horizontalMargin), mPaintBlack);
+        } else {
             canvas.drawText(getContext().getString(R.string.bmp_null), 100, 100, new Paint());
+        }
     }
 
 }

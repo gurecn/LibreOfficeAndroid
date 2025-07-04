@@ -70,8 +70,7 @@ public class PresentationActivity extends AppCompatActivity {
 
         // set up presentation_gesture_view
         mGestureView = findViewById(R.id.presentation_gesture_view);
-        final GestureDetectorCompat gestureDetector =
-                new GestureDetectorCompat(this, new PresentationGestureViewListener());
+        final GestureDetectorCompat gestureDetector = new GestureDetectorCompat(this, new PresentationGestureViewListener());
         mGestureView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

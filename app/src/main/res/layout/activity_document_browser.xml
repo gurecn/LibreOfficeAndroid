@@ -67,11 +67,13 @@
                 <Button
                     android:id="@+id/open_file_button"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:gravity="center_vertical"
                     android:text="@string/select_file_to_open"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     app:drawableLeftCompat="@drawable/ic_folder_48dp" />
 
                 <TextView
@@ -105,6 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:focusable="true"
         app:backgroundTint="@color/background_floating"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -136,6 +139,8 @@
             android:layout_marginBottom="@dimen/new_doc_fab_tweak_bottom"
             android:layout_marginTop="@dimen/new_doc_fab_tweak_top"
             android:clickable="true"
+            android:contentDescription="@string/new_textdocument"
+            android:focusable="true"
             app:backgroundTint="@color/background_floating"
             app:fabSize="mini"
             app:srcCompat="@drawable/ic_writer"
@@ -167,6 +172,8 @@
             android:layout_marginBottom="@dimen/new_doc_fab_tweak_bottom"
             android:layout_marginTop="@dimen/new_doc_fab_tweak_top"
             android:clickable="true"
+            android:contentDescription="@string/new_presentation"
+            android:focusable="true"
             app:backgroundTint="@color/background_floating"
             app:fabSize="mini"
             app:srcCompat="@drawable/ic_impress"
@@ -198,7 +205,8 @@
             android:layout_marginBottom="@dimen/new_doc_fab_tweak_bottom"
             android:layout_marginTop="@dimen/new_doc_fab_tweak_top"
             android:clickable="true"
-            app:backgroundTint="@color/background_floating"
+            android:contentDescription="@string/new_spreadsheet"
+            android:focusable="true" app:backgroundTint="@color/background_floating"
             app:fabSize="mini"
             app:srcCompat="@drawable/ic_calc"
             app:useCompatPadding="true" />
@@ -229,7 +237,8 @@
             android:layout_marginBottom="@dimen/new_doc_fab_tweak_bottom"
             android:layout_marginTop="@dimen/new_doc_fab_tweak_top"
             android:clickable="true"
-            app:backgroundTint="@color/background_floating"
+            android:contentDescription="@string/new_drawing"
+            android:focusable="true" app:backgroundTint="@color/background_floating"
             app:fabSize="mini"
             app:srcCompat="@drawable/ic_draw"
             app:useCompatPadding="true" />
