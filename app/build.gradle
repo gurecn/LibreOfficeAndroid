@@ -1,0 +1,83 @@
+plugins {
+    alias(libs.plugins.android.application)
+}
+
+android {
+    namespace 'org.libreoffice'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "org.example.libreoffice"
+        minSdk 24
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
+
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
+    }
+
+    buildFeatures {
+        buildConfig true // 确保这里是true或者不存在（默认true）
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            manifestPlaceholders = [installLocation: "preferExternal"]
+            buildConfigField "boolean", "ALLOW_EDITING", "false"
+            buildConfigField "String", "BUILD_ID_SHORT", '"2cac2ee38445"'
+            buildConfigField "String", "PRIVACY_POLICY_URL", '"undefined"'
+            buildConfigField "String", "VENDOR", '"gure"'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled true
+            shrinkResources true
+            manifestPlaceholders = [installLocation: "auto"]
+            buildConfigField "boolean", "ALLOW_EDITING", "false"
+            buildConfigField "String", "BUILD_ID_SHORT", '"2cac2ee38445"'
+            buildConfigField "String", "PRIVACY_POLICY_URL", '"undefined"'
+            buildConfigField "String", "VENDOR", '"gure"'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lint {
+        warningsAsErrors true
+        // ignore missing or extra translations, since these are tracked/managed via Weblate
+        ignore 'ExtraTranslation', 'MissingTranslation'
+        // don't error-out on external updates (new gradle plugin, library versions
+        // or target API become available)
+        // don't error-out on TypographyEllipsis, since this can be introduced with
+        // new translations, and those are handled in Weblate
+        informational 'AndroidGradlePluginVersion', 'GradleDependency', 'NewerVersionAvailable', 'OldTargetApi', 'TypographyEllipsis'
+        // don't fail on pre-existing issues
+        // These should be dealt with at some point, though.
+        // To update lint-baseline.xml, just remove the file and run the build again.
+        baseline file("lint-baseline.xml")
+        // s.a. lint.xml that contains further config
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation libs.multidex
+    implementation libs.appcompat
+    implementation libs.material
+    implementation libs.constraintlayout
+}
