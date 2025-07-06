@@ -6,7 +6,6 @@ import android.graphics.PointF;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
 import org.json.JSONException;
@@ -18,7 +17,6 @@ import org.libreoffice.kit.Office;
 import org.mozilla.gecko.gfx.BufferedCairoImage;
 import org.mozilla.gecko.gfx.CairoImage;
 import org.mozilla.gecko.gfx.IntSize;
-
 import java.io.File;
 import java.nio.ByteBuffer;
 
@@ -35,13 +33,10 @@ class LOKitTileProvider implements TileProvider {
     private Document mDocument;
     private final boolean mIsReady;
     private final LibreOfficeMainActivity mContext;
-
     private final float mDPI;
     private float mWidthTwip;
     private float mHeightTwip;
-
     private final Document.MessageCallback mMessageCallback;
-
     private final long objectCreationTime = System.currentTimeMillis();
 
     /**
@@ -52,43 +47,23 @@ class LOKitTileProvider implements TileProvider {
     LOKitTileProvider(LibreOfficeMainActivity context, InvalidationHandler messageCallback, String input) {
         mContext = context;
         mMessageCallback = messageCallback;
-
-        LibreOfficeKit.putenv("SAL_LOG=+WARN+INFO");
         LibreOfficeKit.init(mContext);
-
         mOffice = new Office(LibreOfficeKit.getLibreOfficeKitHandle());
         mOffice.setMessageCallback(messageCallback);
         mOffice.setOptionalFeatures(Document.LOK_FEATURE_DOCUMENT_PASSWORD);
         mContext.setTileProvider(this);
         mInputFile = input;
-
-        Log.i(LOGTAG, "====> Loading file '" + input + "'");
-
         File fileToBeEncoded = new File(input);
         String encodedFileName = android.net.Uri.encode(fileToBeEncoded.getName());
-
-        mDocument = mOffice.documentLoad(
-                (new File(fileToBeEncoded.getParent(),encodedFileName)).getPath()
-        );
-
+        mDocument = mOffice.documentLoad((new File(fileToBeEncoded.getParent(),encodedFileName)).getPath());
         if (mDocument == null && !mContext.isPasswordProtected()) {
-            Log.i(LOGTAG, "====> mOffice.documentLoad() returned null, trying to restart 'Office' and loading again");
             mOffice.destroy();
-            Log.i(LOGTAG, "====> mOffice.destroy() done");
             ByteBuffer handle = LibreOfficeKit.getLibreOfficeKitHandle();
-            Log.i(LOGTAG, "====> getLibreOfficeKitHandle() = " + handle);
             mOffice = new Office(handle);
-            Log.i(LOGTAG, "====> new Office created");
             mOffice.setMessageCallback(messageCallback);
             mOffice.setOptionalFeatures(Document.LOK_FEATURE_DOCUMENT_PASSWORD);
-            Log.i(LOGTAG, "====> setup Lokit callback and optional features (password support)");
-            mDocument = mOffice.documentLoad(
-                    (new File(fileToBeEncoded.getParent(),encodedFileName)).getPath()
-            );
+            mDocument = mOffice.documentLoad((new File(fileToBeEncoded.getParent(),encodedFileName)).getPath());
         }
-
-        Log.i(LOGTAG, "====> mDocument = " + mDocument);
-
         mDPI = LOKitShell.getDpi(mContext);
         mTileWidth = pixelToTwip(TILE_SIZE, mDPI);
         mTileHeight = pixelToTwip(TILE_SIZE, mDPI);
@@ -109,29 +84,19 @@ class LOKitTileProvider implements TileProvider {
      */
     private void postLoad() {
         mDocument.setMessageCallback(mMessageCallback);
-
         resetParts();
         // Writer documents always have one part, so hide the navigation drawer.
         if (mDocument.getDocumentType() == Document.DOCTYPE_TEXT) {
             mContext.disableNavigationDrawer();
             mContext.getToolbarController().hideItem(R.id.action_parts);
         }
-
         // Enable headers for Calc documents
         if (mDocument.getDocumentType() == Document.DOCTYPE_SPREADSHEET) {
             mContext.initializeCalcHeaders();
         }
-
         mDocument.setPart(0);
-
         setupDocumentFonts();
-
-        LOKitShell.getMainHandler().post(new Runnable() {
-            @Override
-            public void run() {
-                mContext.getDocumentPartViewListAdapter().notifyDataSetChanged();
-            }
-        });
+        LOKitShell.getMainHandler().post(() -> mContext.getDocumentPartViewListAdapter().notifyDataSetChanged());
     }
 
     public void addPart(){
@@ -154,7 +119,6 @@ class LOKitTileProvider implements TileProvider {
         } else if (mDocument.getDocumentType() == Document.DOCTYPE_PRESENTATION){
             LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND, ".uno:InsertPage"));
         }
-
         String partName = mDocument.getPartName(parts);
         if (partName.isEmpty()) {
             partName = getGenericPartName(parts);
@@ -171,11 +135,9 @@ class LOKitTileProvider implements TileProvider {
             int parts = mDocument.getParts();
             for (int i = 0; i < parts; i++) {
                 String partName = mDocument.getPartName(i);
-
                 if (partName.isEmpty()) {
                     partName = getGenericPartName(i);
                 }
-                Log.i(LOGTAG, "resetParts: " + partName);
                 mDocument.setPart(i);
                 resetDocumentSize();
                 final DocumentPartView partView = new DocumentPartView(i, partName);
@@ -188,7 +150,6 @@ class LOKitTileProvider implements TileProvider {
         try{
             for(int i=0; i<mDocument.getParts(); i++){
                 if(mContext.getDocumentPartView().get(i).partName.equals(partName)){
-                    //part name must be unique
                     Toast.makeText(mContext, mContext.getString(R.string.name_already_used), Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -214,20 +175,12 @@ class LOKitTileProvider implements TileProvider {
 
     public void removePart() {
         try{
-            if (!isSpreadsheet() && !isPresentation()) {
-                //document must be spreadsheet or presentation
-                return;
-            }
-
+            if (!isSpreadsheet() && !isPresentation()) return;
             if(isPresentation()){
                 LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND_NOTIFY, ".uno:DeletePage", true));
                 return;
             }
-
-            if(getPartsCount() < 2){
-                return;
-            }
-
+            if(getPartsCount() < 2)return;
             JSONObject parameter = new JSONObject();
             JSONObject index = new JSONObject();
             index.put("type","long");
@@ -245,39 +198,17 @@ class LOKitTileProvider implements TileProvider {
         if (takeOwnership) {
             options = "TakeOwnership";
         }
-
         final String newFilePath = "file://" + filePath;
-        Log.d("saveFilePathURL", newFilePath);
         LOKitShell.showProgressSpinner(mContext);
         mDocument.saveAs(newFilePath, format, options);
         final boolean ok;
         if (!mOffice.getError().isEmpty()){
             ok = true;
-            Log.e("Save Error", mOffice.getError());
-            if (format.equals("svg")) {
-                // error in creating temp slideshow svg file
-                Log.d(LOGTAG, "Error in creating temp slideshow svg file");
-            } else if(format.equals("pdf")){
-                Log.d(LOGTAG, "Error in creating pdf file");
-            } else {
-                LOKitShell.getMainHandler().post(new Runnable() {
-                    @Override
-                    public void run() {
-                        // There was some error
-                        mContext.showCustomStatusMessage(mContext.getString(R.string.unable_to_save));
-                    }
-                });
-            }
+            LOKitShell.getMainHandler().post(() -> mContext.showCustomStatusMessage(mContext.getString(R.string.unable_to_save)));
         } else {
             ok = false;
             if (format.equals("svg")) {
-                // successfully created temp slideshow svg file
-                LOKitShell.getMainHandler().post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mContext.startPresentation(newFilePath);
-                    }
-                });
+                LOKitShell.getMainHandler().post(() -> mContext.startPresentation(newFilePath));
             } else if (takeOwnership) {
                 mInputFile = filePath;
             }
@@ -297,8 +228,6 @@ class LOKitTileProvider implements TileProvider {
             return saveDocumentAs(filePath, "odp", takeOwnership);
         else if (docType == Document.DOCTYPE_DRAWING)
             return saveDocumentAs(filePath, "odg", takeOwnership);
-
-        Log.w(LOGTAG, "Cannot determine file format from document. Not saving.");
         return false;
     }
 
@@ -311,7 +240,6 @@ class LOKitTileProvider implements TileProvider {
             PrintManager printManager = (PrintManager) mContext.getSystemService(Context.PRINT_SERVICE);
             PrintDocumentAdapter printAdapter = new PDFDocumentAdapter(mContext, cacheFile);
             printManager.print("Document", printAdapter, new PrintAttributes.Builder().build());
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -323,29 +251,19 @@ class LOKitTileProvider implements TileProvider {
 
     private void setupDocumentFonts() {
         String values = mDocument.getCommandValues(".uno:CharFontName");
-        if (values == null || values.isEmpty())
-            return;
-
+        if (values == null || values.isEmpty()) return;
         mContext.getFontController().parseJson(values);
         mContext.getFontController().setupFontViews();
     }
 
     private String getGenericPartName(int i) {
-        if (mDocument == null) {
-            return "";
-        }
-        switch (mDocument.getDocumentType()) {
-            case Document.DOCTYPE_DRAWING:
-            case Document.DOCTYPE_TEXT:
-                return mContext.getString(R.string.page) + " " + (i + 1);
-            case Document.DOCTYPE_SPREADSHEET:
-                return mContext.getString(R.string.sheet) + " " + (i + 1);
-            case Document.DOCTYPE_PRESENTATION:
-                return mContext.getString(R.string.slide) + " " + (i + 1);
-            case Document.DOCTYPE_OTHER:
-            default:
-                return mContext.getString(R.string.part) + " " + (i + 1);
-        }
+        if (mDocument == null) return "";
+        return switch (mDocument.getDocumentType()) {
+            case Document.DOCTYPE_DRAWING, Document.DOCTYPE_TEXT -> mContext.getString(R.string.page) + " " + (i + 1);
+            case Document.DOCTYPE_SPREADSHEET -> mContext.getString(R.string.sheet) + " " + (i + 1);
+            case Document.DOCTYPE_PRESENTATION -> mContext.getString(R.string.slide) + " " + (i + 1);
+            default -> mContext.getString(R.string.part) + " " + (i + 1);
+        };
     }
 
     static float twipToPixel(float input, float dpi) {
@@ -436,15 +354,7 @@ class LOKitTileProvider implements TileProvider {
     private boolean resetDocumentSize() {
         mWidthTwip = mDocument.getDocumentWidth();
         mHeightTwip = mDocument.getDocumentHeight();
-
-        if (mWidthTwip == 0 || mHeightTwip == 0) {
-            Log.e(LOGTAG, "Document size zero - last error: " + mOffice.getError());
-            return false;
-        } else {
-            Log.i(LOGTAG, "Reset document size: " + mDocument.getDocumentWidth() + " x " + mDocument.getDocumentHeight());
-        }
-
-        return true;
+        return mWidthTwip != 0 && mHeightTwip != 0;
     }
 
     @Override
@@ -501,17 +411,7 @@ class LOKitTileProvider implements TileProvider {
             float twipY = pixelToTwip(y, mDPI) / zoom;
             float twipWidth = mTileWidth / zoom;
             float twipHeight = mTileHeight / zoom;
-            long start = System.currentTimeMillis() - objectCreationTime;
-
-            //Log.i(LOGTAG, "paintTile >> @" + start + " (" + tileSize.width + " " + tileSize.height + " " + (int) twipX + " " + (int) twipY + " " + (int) twipWidth + " " + (int) twipHeight + ")");
             mDocument.paintTile(image.getBuffer(), tileSize.width, tileSize.height, (int) twipX, (int) twipY, (int) twipWidth, (int) twipHeight);
-
-            long stop = System.currentTimeMillis() - objectCreationTime;
-            //Log.i(LOGTAG, "paintTile << @" + stop + " elapsed: " + (stop - start));
-        } else {
-            if (mDocument == null) {
-                Log.e(LOGTAG, "Document is null!!");
-            }
         }
     }
 
@@ -532,23 +432,13 @@ class LOKitTileProvider implements TileProvider {
             heightPixel = size;
             widthPixel = (int) (heightPixel * ratio);
         }
-
-        Log.w(LOGTAG, "Thumbnail size: " + getPageWidth() + " " + getPageHeight() + " " + widthPixel + " " + heightPixel);
-
         ByteBuffer buffer = ByteBuffer.allocateDirect(widthPixel * heightPixel * 4);
-        if (mDocument != null)
-            mDocument.paintTile(buffer, widthPixel, heightPixel, 0, 0, (int) mWidthTwip, (int) mHeightTwip);
-
+        if (mDocument != null) mDocument.paintTile(buffer, widthPixel, heightPixel, 0, 0, (int) mWidthTwip, (int) mHeightTwip);
         Bitmap bitmap = null;
         try {
             bitmap = Bitmap.createBitmap(widthPixel, heightPixel, Bitmap.Config.ARGB_8888);
             bitmap.copyPixelsFromBuffer(buffer);
-        } catch (IllegalArgumentException e) {
-            Log.e(LOGTAG, "width (" + widthPixel + ") and height (" + heightPixel + ") must not be 0! (ToDo: likely timing issue)");
-        }
-        if (bitmap == null) {
-            Log.w(LOGTAG, "Thumbnail not created!");
-        }
+        } catch (IllegalArgumentException ignored) {}
         return bitmap;
     }
 
@@ -557,7 +447,6 @@ class LOKitTileProvider implements TileProvider {
      */
     @Override
     public void close() {
-        Log.i(LOGTAG, "Document destroyed: " + mInputFile);
         if (mDocument != null) {
             mDocument.destroy();
             mDocument = null;
@@ -600,13 +489,10 @@ class LOKitTileProvider implements TileProvider {
      * Returns the Unicode character generated by this event or 0.
      */
     private int getCharCode(KeyEvent keyEvent) {
-        switch (keyEvent.getKeyCode())
-        {
-            case KeyEvent.KEYCODE_DEL:
-            case KeyEvent.KEYCODE_ENTER:
-                return 0;
-        }
-        return keyEvent.getUnicodeChar();
+        return switch (keyEvent.getKeyCode()) {
+            case KeyEvent.KEYCODE_DEL, KeyEvent.KEYCODE_ENTER -> 0;
+            default -> keyEvent.getUnicodeChar();
+        };
     }
 
     /**
@@ -614,13 +500,11 @@ class LOKitTileProvider implements TileProvider {
      * control keys).
      */
     private int getKeyCode(KeyEvent keyEvent) {
-        switch (keyEvent.getKeyCode()) {
-            case KeyEvent.KEYCODE_DEL:
-                return 1283;  //com.sun.star.awt.Key.BACKSPACE;
-            case KeyEvent.KEYCODE_ENTER:
-                return 1280; //com.sun.star.awt.Key.RETURN;
-        }
-        return 0;
+        return switch (keyEvent.getKeyCode()) {
+            case KeyEvent.KEYCODE_DEL -> 1283;
+            case KeyEvent.KEYCODE_ENTER -> 1280;
+            default -> 0;
+        };
     }
 
     /**
@@ -648,7 +532,6 @@ class LOKitTileProvider implements TileProvider {
     private void mouseButton(int type, PointF inDocument, int numberOfClicks, float zoomFactor) {
         int x = (int) pixelToTwip(inDocument.x, mDPI);
         int y = (int) pixelToTwip(inDocument.y, mDPI);
-
         mDocument.setClientZoom(TILE_SIZE, TILE_SIZE, (int) (mTileWidth / zoomFactor), (int) (mTileHeight / zoomFactor));
         mDocument.postMouseEvent(type, x, y, numberOfClicks, Document.MOUSE_BUTTON_LEFT, Document.KEYBOARD_MODIFIER_NONE);
     }
@@ -678,11 +561,6 @@ class LOKitTileProvider implements TileProvider {
         postUnoCommand(command, arguments, false);
     }
 
-    /**
-     * @param command
-     * @param arguments
-     * @param notifyWhenFinished
-     */
     @Override
     public void postUnoCommand(String command, String arguments, boolean notifyWhenFinished) {
         mDocument.postUnoCommand(command, arguments, notifyWhenFinished);
@@ -718,26 +596,15 @@ class LOKitTileProvider implements TileProvider {
         setTextSelection(Document.SET_TEXT_SELECTION_RESET, documentCoordinate);
     }
 
-    /**
-     * @param mimeType
-     * @return
-     */
     @Override
     public String getTextSelection(String mimeType) {
         return mDocument.getTextSelection(mimeType);
     }
 
-    /**
-     * paste
-     * @param mimeType
-     * @param data
-     * @return
-     */
     @Override
     public boolean paste(String mimeType, String data) {
         return mDocument.paste(mimeType, data);
     }
-
 
     /**
      * @see TileProvider#setGraphicSelectionStart(PointF)
