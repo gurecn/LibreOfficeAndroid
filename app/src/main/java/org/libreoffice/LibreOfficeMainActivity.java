@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.AssetManager;
 import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Build;
@@ -42,10 +41,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.ByteBuffer;
-import java.nio.channels.Channels;
-import java.nio.channels.FileChannel;
-import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -57,7 +52,6 @@ public class LibreOfficeMainActivity extends AppCompatActivity implements Settin
 
     private static final String LOGTAG = "LibreOfficeMainActivity";
     public static final String ENABLE_EXPERIMENTAL_PREFS_KEY = "ENABLE_EXPERIMENTAL";
-    private static final String ASSETS_EXTRACTED_PREFS_KEY = "ASSETS_EXTRACTED";
     private static final String ENABLE_DEVELOPER_PREFS_KEY = "ENABLE_DEVELOPER";
     private static final int REQUEST_CODE_SAVEAS = 12345;
     private static final int REQUEST_CODE_EXPORT_TO_PDF = 12346;
@@ -228,11 +222,6 @@ public class LibreOfficeMainActivity extends AppCompatActivity implements Settin
         SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         mIsExperimentalMode =  sPrefs.getBoolean(ENABLE_EXPERIMENTAL_PREFS_KEY, false);
         mIsDeveloperMode = mIsExperimentalMode && sPrefs.getBoolean(ENABLE_DEVELOPER_PREFS_KEY, false);
-        if (sPrefs.getInt(ASSETS_EXTRACTED_PREFS_KEY, 0) != BuildConfig.VERSION_CODE) {
-            if(copyFromAssets(getAssets(), "unpack", getApplicationInfo().dataDir)) {
-                sPrefs.edit().putInt(ASSETS_EXTRACTED_PREFS_KEY, BuildConfig.VERSION_CODE).apply();
-            }
-        }
     }
 
     // Loads a new Document and saves it to a temporary file
@@ -776,62 +765,7 @@ public class LibreOfficeMainActivity extends AppCompatActivity implements Settin
         }
     }
 
-    private static boolean copyFromAssets(AssetManager assetManager,
-                                          String fromAssetPath, String targetDir) {
-        try {
-            String[] files = assetManager.list(fromAssetPath);
 
-            boolean res = true;
-            for (String file : files) {
-                String[] dirOrFile = assetManager.list(fromAssetPath + "/" + file);
-                if ( dirOrFile.length == 0) {
-                    // noinspection ResultOfMethodCallIgnored
-                    new File(targetDir).mkdirs();
-                    res &= copyAsset(assetManager,
-                            fromAssetPath + "/" + file,
-                            targetDir + "/" + file);
-                } else
-                    res &= copyFromAssets(assetManager,
-                            fromAssetPath + "/" + file,
-                            targetDir + "/" + file);
-            }
-            return res;
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e(LOGTAG, "copyFromAssets failed: " + e.getMessage());
-            return false;
-        }
-    }
-
-    private static boolean copyAsset(AssetManager assetManager, String fromAssetPath, String toPath) {
-        ReadableByteChannel source = null;
-        FileChannel dest = null;
-        try {
-            try {
-                source = Channels.newChannel(assetManager.open(fromAssetPath));
-                dest = new FileOutputStream(toPath).getChannel();
-                long bytesTransferred = 0;
-                // might not copy all at once, so make sure everything gets copied...
-                ByteBuffer buffer = ByteBuffer.allocate(4096);
-                while (source.read(buffer) > 0) {
-                    buffer.flip();
-                    bytesTransferred += dest.write(buffer);
-                    buffer.clear();
-                }
-                Log.v(LOGTAG, "Success copying " + fromAssetPath + " to " + toPath + " bytes: " + bytesTransferred);
-                return true;
-            } finally {
-                if (dest != null) dest.close();
-                if (source != null) source.close();
-            }
-        } catch (FileNotFoundException e) {
-            Log.e(LOGTAG, "file " + fromAssetPath + " not found! " + e.getMessage());
-            return false;
-        } catch (IOException e) {
-            Log.e(LOGTAG, "failed to copy file " + fromAssetPath + " from assets to " + toPath + " - " + e.getMessage());
-            return false;
-        }
-    }
 
     /**
      * Copies everything from the given input stream to the given output stream
