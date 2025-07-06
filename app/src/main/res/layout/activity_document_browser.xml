@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:fitsSystemWindows="true"
     android:clipToPadding="true"
     android:orientation="vertical">
@@ -16,7 +15,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:elevation="0.5dp"
-        android:background="@color/white"
         app:theme="@style/LibreOfficeTheme.Toolbar"
         tools:theme="@style/LibreOfficeTheme.Toolbar"
         app:popupTheme="@style/AppBaseTheme"
@@ -52,14 +50,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:divider="@color/doorhanger_divider_light"
                 android:showDividers="middle">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:padding="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="5dp"
                     android:text="@string/title_browser"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -82,7 +81,9 @@
                     android:text="@string/title_recents"
                     android:gravity="center_vertical"
                     android:textSize="14sp"
-                    android:padding="16dp"
+                    android:paddingTop="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="5dp"
                     android:textStyle="bold" />
 
                 <!--Recent files-->
@@ -108,7 +109,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        app:backgroundTint="@color/background_floating"
+        app:backgroundTint="?android:attr/colorPrimary"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -141,7 +142,7 @@
             android:clickable="true"
             android:contentDescription="@string/new_textdocument"
             android:focusable="true"
-            app:backgroundTint="@color/background_floating"
+            app:backgroundTint="?android:attr/colorPrimary"
             app:fabSize="mini"
             app:srcCompat="@drawable/ic_writer"
             app:useCompatPadding="true" />
@@ -174,7 +175,7 @@
             android:clickable="true"
             android:contentDescription="@string/new_presentation"
             android:focusable="true"
-            app:backgroundTint="@color/background_floating"
+            app:backgroundTint="?android:attr/colorPrimary"
             app:fabSize="mini"
             app:srcCompat="@drawable/ic_impress"
             app:useCompatPadding="true" />
@@ -206,7 +207,8 @@
             android:layout_marginTop="@dimen/new_doc_fab_tweak_top"
             android:clickable="true"
             android:contentDescription="@string/new_spreadsheet"
-            android:focusable="true" app:backgroundTint="@color/background_floating"
+            android:focusable="true"
+            app:backgroundTint="?android:attr/colorPrimary"
             app:fabSize="mini"
             app:srcCompat="@drawable/ic_calc"
             app:useCompatPadding="true" />
@@ -238,7 +240,8 @@
             android:layout_marginTop="@dimen/new_doc_fab_tweak_top"
             android:clickable="true"
             android:contentDescription="@string/new_drawing"
-            android:focusable="true" app:backgroundTint="@color/background_floating"
+            android:focusable="true"
+            app:backgroundTint="?android:attr/colorPrimary"
             app:fabSize="mini"
             app:srcCompat="@drawable/ic_draw"
             app:useCompatPadding="true" />

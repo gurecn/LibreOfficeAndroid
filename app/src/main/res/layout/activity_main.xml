@@ -5,7 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/white"
     android:fitsSystemWindows="true"
     android:clipToPadding="true"
     tools:context="org.libreoffice.LibreOfficeMainActivity">
@@ -28,7 +27,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:elevation="0.5dp"
-                    android:background="@color/white"
                     app:theme="@style/LibreOfficeTheme.Toolbar"
                     tools:theme="@style/LibreOfficeTheme.Toolbar"
                     app:popupTheme="@style/AppBaseTheme" />
@@ -37,9 +35,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/background_floating">
-
+                android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/calc_address"
                     android:layout_width="@dimen/calc_address_bar_width"
@@ -50,7 +46,6 @@
                     android:visibility="gone"
                     android:importantForAutofill="no"
                     tools:ignore="LabelFor" />
-
                 <EditText
                     android:id="@+id/calc_formula"
                     android:layout_width="0dp"
@@ -61,7 +56,6 @@
                     android:visibility="gone"
                     android:importantForAutofill="no"
                     tools:ignore="LabelFor" />
-
             </LinearLayout>
 
             <RelativeLayout
@@ -133,7 +127,6 @@
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#9FFF"
         android:choiceMode="singleChoice"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
