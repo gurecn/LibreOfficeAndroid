@@ -6,7 +6,7 @@ import android.graphics.Region;
 import android.graphics.RegionIterator;
 import android.opengl.GLES20;
 import android.util.Log;
-import org.libreoffice.TileIdentifier;
+import org.libreoffice.data.TileIdentifier;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 

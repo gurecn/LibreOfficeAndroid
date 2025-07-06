@@ -1,6 +1,6 @@
 package org.libreoffice.canvas;
 
-import org.libreoffice.LibreOfficeMainActivity;
+import org.libreoffice.ui.LibreOfficeMainActivity;
 
 import org.libreoffice.R;
 

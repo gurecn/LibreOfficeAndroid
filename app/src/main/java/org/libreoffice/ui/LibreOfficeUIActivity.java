@@ -32,11 +32,12 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import org.libreoffice.AboutDialogFragment;
-import org.libreoffice.LibreOfficeMainActivity;
-import org.libreoffice.LocaleHelper;
+
+import org.libreoffice.manager.LocaleHelper;
 import org.libreoffice.R;
-import org.libreoffice.SettingsActivity;
+import org.libreoffice.data.RecentFile;
+import org.libreoffice.utils.FileUtilities;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

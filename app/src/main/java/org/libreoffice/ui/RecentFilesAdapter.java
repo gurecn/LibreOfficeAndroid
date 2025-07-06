@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import org.libreoffice.R;
+import org.libreoffice.data.RecentFile;
+import org.libreoffice.utils.FileUtilities;
+
 import java.util.List;
 
 class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.ViewHolder> {

@@ -13,9 +13,9 @@ import android.widget.PopupWindow;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.libreoffice.LOEvent;
-import org.libreoffice.LOKitShell;
-import org.libreoffice.LibreOfficeMainActivity;
+import org.libreoffice.data.LOEvent;
+import org.libreoffice.manager.LOKitShell;
+import org.libreoffice.ui.LibreOfficeMainActivity;
 import org.libreoffice.canvas.CalcHeaderCell;
 import org.libreoffice.kit.Document;
 import org.mozilla.gecko.gfx.ImmutableViewportMetrics;
@@ -24,7 +24,7 @@ import org.mozilla.gecko.gfx.LayerView;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static org.libreoffice.SearchController.addProperty;
+import static org.libreoffice.manager.SearchController.addProperty;
 
 public class CalcHeadersView extends View {
     private static final String LOGTAG = CalcHeadersView.class.getSimpleName();

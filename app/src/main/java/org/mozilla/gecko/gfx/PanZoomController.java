@@ -3,7 +3,7 @@ package org.mozilla.gecko.gfx;
 import android.graphics.PointF;
 import android.view.MotionEvent;
 import android.view.View;
-import org.libreoffice.LibreOfficeMainActivity;
+import org.libreoffice.ui.LibreOfficeMainActivity;
 
 interface PanZoomController {
 

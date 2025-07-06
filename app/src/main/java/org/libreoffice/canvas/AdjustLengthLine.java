@@ -8,15 +8,15 @@ import android.graphics.RectF;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.libreoffice.LOEvent;
-import org.libreoffice.LOKitShell;
-import org.libreoffice.LibreOfficeMainActivity;
+import org.libreoffice.data.LOEvent;
+import org.libreoffice.manager.LOKitShell;
+import org.libreoffice.ui.LibreOfficeMainActivity;
 import org.libreoffice.overlay.CalcHeadersView;
 import org.mozilla.gecko.gfx.ImmutableViewportMetrics;
 
-import static org.libreoffice.SearchController.addProperty;
-import static org.libreoffice.UnitConverter.pixelToTwip;
-import static org.libreoffice.UnitConverter.twipsToHMM;
+import static org.libreoffice.manager.SearchController.addProperty;
+import static org.libreoffice.utils.UnitConverter.pixelToTwip;
+import static org.libreoffice.utils.UnitConverter.twipsToHMM;
 
 public class AdjustLengthLine extends CommonCanvasElement {
 

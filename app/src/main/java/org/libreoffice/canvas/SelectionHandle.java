@@ -3,8 +3,8 @@ package org.libreoffice.canvas;
 import android.graphics.Bitmap;
 import android.graphics.PointF;
 
-import org.libreoffice.LOKitShell;
-import org.libreoffice.LibreOfficeMainActivity;
+import org.libreoffice.manager.LOKitShell;
+import org.libreoffice.ui.LibreOfficeMainActivity;
 import org.mozilla.gecko.gfx.ImmutableViewportMetrics;
 
 /**

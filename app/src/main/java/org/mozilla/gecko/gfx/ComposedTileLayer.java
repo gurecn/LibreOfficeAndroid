@@ -7,8 +7,8 @@ import android.graphics.RectF;
 import android.graphics.Region;
 import android.util.Log;
 
-import org.libreoffice.LOKitShell;
-import org.libreoffice.TileIdentifier;
+import org.libreoffice.manager.LOKitShell;
+import org.libreoffice.data.TileIdentifier;
 import org.mozilla.gecko.util.FloatUtils;
 
 import java.util.ArrayList;

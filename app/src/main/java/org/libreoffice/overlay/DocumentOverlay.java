@@ -3,8 +3,8 @@ package org.libreoffice.overlay;
 import android.graphics.RectF;
 import android.util.Log;
 
-import org.libreoffice.LOKitShell;
-import org.libreoffice.LibreOfficeMainActivity;
+import org.libreoffice.manager.LOKitShell;
+import org.libreoffice.ui.LibreOfficeMainActivity;
 import org.libreoffice.R;
 import org.libreoffice.canvas.SelectionHandle;
 import org.mozilla.gecko.gfx.Layer;

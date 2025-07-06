@@ -20,16 +20,16 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.libreoffice.LOEvent;
-import org.libreoffice.LOKitShell;
-import org.libreoffice.LibreOfficeMainActivity;
+import org.libreoffice.data.LOEvent;
+import org.libreoffice.manager.LOKitShell;
+import org.libreoffice.ui.LibreOfficeMainActivity;
 import org.libreoffice.R;
 import org.mozilla.gecko.gfx.LayerView;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import static org.libreoffice.SearchController.addProperty;
+import static org.libreoffice.manager.SearchController.addProperty;
 
 public class CalcHeadersController {
     private static final String LOGTAG = CalcHeadersController.class.getSimpleName();

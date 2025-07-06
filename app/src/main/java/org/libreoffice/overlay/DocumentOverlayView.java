@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import org.libreoffice.LibreOfficeMainActivity;
+import org.libreoffice.ui.LibreOfficeMainActivity;
 import org.libreoffice.R;
 import org.libreoffice.canvas.AdjustLengthLine;
 import org.libreoffice.canvas.CalcSelectionBox;

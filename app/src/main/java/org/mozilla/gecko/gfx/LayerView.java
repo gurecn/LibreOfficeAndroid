@@ -16,10 +16,9 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.widget.FrameLayout;
-import org.libreoffice.LOEvent;
-import org.libreoffice.LOKitShell;
-import org.libreoffice.LibreOfficeMainActivity;
-import org.libreoffice.R;
+import org.libreoffice.data.LOEvent;
+import org.libreoffice.manager.LOKitShell;
+import org.libreoffice.ui.LibreOfficeMainActivity;
 import org.mozilla.gecko.OnInterceptTouchListener;
 import org.mozilla.gecko.OnSlideSwipeListener;
 

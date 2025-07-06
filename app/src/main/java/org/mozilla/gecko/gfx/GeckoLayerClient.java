@@ -1,10 +1,10 @@
 package org.mozilla.gecko.gfx;
 
-import org.libreoffice.LibreOfficeMainActivity;
+import org.libreoffice.ui.LibreOfficeMainActivity;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.DisplayMetrics;
-import org.libreoffice.LOKitShell;
+import org.libreoffice.manager.LOKitShell;
 import org.mozilla.gecko.ZoomConstraints;
 import java.util.List;
 
