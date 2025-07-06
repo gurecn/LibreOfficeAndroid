@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,12 +37,11 @@ import org.libreoffice.LibreOfficeMainActivity;
 import org.libreoffice.LocaleHelper;
 import org.libreoffice.R;
 import org.libreoffice.SettingsActivity;
-import org.libreoffice.SettingsListenerModel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class LibreOfficeUIActivity extends AppCompatActivity implements SettingsListenerModel.OnSettingsPreferenceChangedListener, View.OnClickListener{
+public class LibreOfficeUIActivity extends AppCompatActivity implements View.OnClickListener{
     public enum DocumentType {
         WRITER,
         CALC,
@@ -56,7 +54,6 @@ public class LibreOfficeUIActivity extends AppCompatActivity implements Settings
     public static final String EXPLORER_PREFS_KEY = "EXPLORER_PREFS";
     private static final String RECENT_DOCUMENTS_KEY = "RECENT_DOCUMENT_URIS";
     private static final String RECENT_DOCUMENTS_DELIMITER = " ";
-    private static final String DISPLAY_LANGUAGE = "DISPLAY_LANGUAGE";
     public static final String NEW_DOC_TYPE_KEY = "NEW_DOC_TYPE_KEY";
     public static final String NEW_WRITER_STRING_KEY = "private:factory/swriter";
     public static final String NEW_IMPRESS_STRING_KEY = "private:factory/simpress";
@@ -131,8 +128,6 @@ public class LibreOfficeUIActivity extends AppCompatActivity implements Settings
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        readPreferences();
-        SettingsListenerModel.getInstance().setListener(this);
         setContentView(R.layout.activity_document_browser);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -287,22 +282,11 @@ public class LibreOfficeUIActivity extends AppCompatActivity implements Settings
             return true;
         }
         if (itemId == R.id.action_settings) {
-            startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void readPreferences(){
-        SharedPreferences defaultPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        final String displayLanguage = defaultPrefs.getString(DISPLAY_LANGUAGE, LocaleHelper.SYSTEM_DEFAULT_LANGUAGE);
-        LocaleHelper.setLocale(this, displayLanguage);
-    }
-
-    @Override
-    public void settingsPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        readPreferences();
     }
 
     private void addDocumentToRecents(Uri fileUri) {

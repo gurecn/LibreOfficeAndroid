@@ -31,7 +31,7 @@ public class ColorPickerAdapter extends RecyclerView.Adapter<ColorPickerAdapter.
 
     @Override
     public ColorPickerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View item = LayoutInflater.from(mContext).inflate(R.layout.colorbox, parent, false);
+        View item = LayoutInflater.from(mContext).inflate(R.layout.color_box, parent, false);
         return new ColorPickerViewHolder(item);
 
     }

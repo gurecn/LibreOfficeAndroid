@@ -4,17 +4,14 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceGroup;
 
 public class SettingsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_settings);
         // Display the fragment as the main content.
-        getFragmentManager().beginTransaction()
-            .replace(android.R.id.content, new SettingsFragment())
-            .commit();
+        getFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
     }
 
     public static class SettingsFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -41,9 +38,6 @@ public class SettingsActivity extends Activity {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             SettingsListenerModel.getInstance().changePreferenceState(sharedPreferences, key);
-            if(key.equals("DISPLAY_LANGUAGE")){
-                getActivity().recreate();
-            }
         }
     }
 }
