@@ -9,7 +9,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import org.libreoffice.R;
 import org.libreoffice.data.LOEvent;
 import org.libreoffice.ui.MainActivity;

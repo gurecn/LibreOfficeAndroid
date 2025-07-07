@@ -3,7 +3,6 @@ package org.libreoffice.ui;
 import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -32,12 +31,9 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import org.libreoffice.manager.LocaleHelper;
 import org.libreoffice.R;
 import org.libreoffice.data.RecentFile;
 import org.libreoffice.utils.FileUtilities;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -143,11 +139,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_WRITE_EXTERNAL_STORAGE);
         }
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(LocaleHelper.onAttach(newBase));
     }
 
     public void createUI() {

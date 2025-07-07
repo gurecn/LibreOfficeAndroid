@@ -5,7 +5,6 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.Log;
 import android.view.KeyEvent;
-
 import org.libreoffice.data.LOEvent;
 import org.libreoffice.utils.ThumbnailCreator;
 import org.libreoffice.data.TileIdentifier;
@@ -22,7 +21,6 @@ import org.mozilla.gecko.gfx.SubTile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
-
 
 public class LOKitThread extends Thread {
     private static final String LOGTAG = LOKitThread.class.getSimpleName();

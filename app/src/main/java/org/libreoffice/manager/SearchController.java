@@ -6,7 +6,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.libreoffice.R;

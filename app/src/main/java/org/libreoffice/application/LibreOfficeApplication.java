@@ -1,13 +1,10 @@
 package org.libreoffice.application;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import androidx.multidex.MultiDexApplication;
-
 import org.libreoffice.BuildConfig;
-import org.libreoffice.manager.LocaleHelper;
 import org.libreoffice.manager.AssetsManager;
 
 public class LibreOfficeApplication extends MultiDexApplication {
@@ -21,11 +18,6 @@ public class LibreOfficeApplication extends MultiDexApplication {
 
     public static Handler getMainHandler() {
         return mainHandler;
-    }
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(LocaleHelper.onAttach(base));
     }
 
     @Override
