@@ -22,7 +22,7 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.libreoffice.data.LOEvent;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.libreoffice.R;
 import org.libreoffice.kit.Document;
 
@@ -43,10 +43,10 @@ public class FormattingController implements View.OnClickListener {
     private static final int SELECT_PHOTO = 2;
     private static final int IMAGE_BUFFER_SIZE = 4 * 1024;
 
-    private final LibreOfficeMainActivity mContext;
+    private final MainActivity mContext;
     private String mCurrentPhotoPath;
 
-    public FormattingController(LibreOfficeMainActivity context) {
+    public FormattingController(MainActivity context) {
         mContext = context;
 
         mContext.findViewById(R.id.button_insertFormatListBullets).setOnClickListener(this);
@@ -274,7 +274,7 @@ public class FormattingController implements View.OnClickListener {
                     params.put("Columns", cols);
                     params.put("Rows", rows);
                     LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND, ".uno:InsertTable",params.toString()));
-                    LibreOfficeMainActivity.setDocumentChanged(true);
+                    MainActivity.setDocumentChanged(true);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -298,19 +298,19 @@ public class FormattingController implements View.OnClickListener {
                 switch (selectedItem[0]){
                     case 0:
                         LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND, ".uno:InsertRowsBefore"));
-                        LibreOfficeMainActivity.setDocumentChanged(true);
+                        MainActivity.setDocumentChanged(true);
                         break;
                     case 1:
                         LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND, ".uno:InsertRowsAfter"));
-                        LibreOfficeMainActivity.setDocumentChanged(true);
+                        MainActivity.setDocumentChanged(true);
                         break;
                     case 2:
                         LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND, ".uno:InsertColumnsBefore"));
-                        LibreOfficeMainActivity.setDocumentChanged(true);
+                        MainActivity.setDocumentChanged(true);
                         break;
                     case 3:
                         LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND, ".uno:InsertColumnsAfter"));
-                        LibreOfficeMainActivity.setDocumentChanged(true);
+                        MainActivity.setDocumentChanged(true);
                         break;
                     case 4:
                         insertTableBuilder.show();
@@ -339,15 +339,15 @@ public class FormattingController implements View.OnClickListener {
                 switch (selectedItem[0]){
                     case 0:
                         LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND, ".uno:DeleteRows"));
-                        LibreOfficeMainActivity.setDocumentChanged(true);
+                        MainActivity.setDocumentChanged(true);
                         break;
                     case 1:
                         LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND, ".uno:DeleteColumns"));
-                        LibreOfficeMainActivity.setDocumentChanged(true);
+                        MainActivity.setDocumentChanged(true);
                         break;
                     case 2:
                         LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND, ".uno:DeleteTable"));
-                        LibreOfficeMainActivity.setDocumentChanged(true);
+                        MainActivity.setDocumentChanged(true);
                         break;
                 }
             }
@@ -463,7 +463,7 @@ public class FormattingController implements View.OnClickListener {
         }
         LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND, ".uno:InsertGraphic", rootJson.toString()));
         LOKitShell.sendEvent(new LOEvent(LOEvent.REFRESH));
-        LibreOfficeMainActivity.setDocumentChanged(true);
+        MainActivity.setDocumentChanged(true);
     }
 
     private void compressImage(int grade) {

@@ -12,16 +12,16 @@ import org.json.JSONObject;
 import org.libreoffice.R;
 import org.libreoffice.utils.UnitConverter;
 import org.libreoffice.data.LOEvent;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 
 public class SearchController implements View.OnClickListener {
-    private final LibreOfficeMainActivity mActivity;
+    private final MainActivity mActivity;
 
     private enum SearchDirection {
         UP, DOWN
     }
 
-    SearchController(LibreOfficeMainActivity activity) {
+    SearchController(MainActivity activity) {
         mActivity = activity;
 
         activity.findViewById(R.id.button_search_up).setOnClickListener(this);

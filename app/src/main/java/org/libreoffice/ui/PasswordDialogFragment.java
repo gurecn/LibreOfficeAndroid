@@ -16,7 +16,7 @@ import org.libreoffice.R;
 
 public class PasswordDialogFragment extends DialogFragment {
 
-    private LibreOfficeMainActivity mContext;
+    private MainActivity mContext;
 
     @NonNull
     @Override
@@ -52,7 +52,7 @@ public class PasswordDialogFragment extends DialogFragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    public void setLOMainActivity(LibreOfficeMainActivity context) {
+    public void setLOMainActivity(MainActivity context) {
         mContext = context;
     }
 }

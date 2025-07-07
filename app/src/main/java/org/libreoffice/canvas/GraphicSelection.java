@@ -7,7 +7,7 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 
 import org.libreoffice.manager.LOKitShell;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.mozilla.gecko.gfx.LayerView;
 
 import static org.libreoffice.canvas.GraphicSelectionHandle.HandlePosition;
@@ -28,12 +28,12 @@ public class GraphicSelection extends CommonCanvasElement {
     private final GraphicSelectionHandle[] mHandles = new GraphicSelectionHandle[8];
     private GraphicSelectionHandle mDragHandle = null;
     private boolean mTriggerSinglePress = false;
-    private final LibreOfficeMainActivity mContext;
+    private final MainActivity mContext;
 
     /**
      * Construct the graphic selection.
      */
-    public GraphicSelection(LibreOfficeMainActivity context) {
+    public GraphicSelection(MainActivity context) {
         mContext = context;
         // Create the paint, which is needed at drawing
         mPaintStroke = new Paint();

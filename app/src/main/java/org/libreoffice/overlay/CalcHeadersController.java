@@ -22,7 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.libreoffice.data.LOEvent;
 import org.libreoffice.manager.LOKitShell;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.libreoffice.R;
 import org.mozilla.gecko.gfx.LayerView;
 
@@ -37,9 +37,9 @@ public class CalcHeadersController {
     private final CalcHeadersView mCalcRowHeadersView;
     private final CalcHeadersView mCalcColumnHeadersView;
 
-    private final LibreOfficeMainActivity mContext;
+    private final MainActivity mContext;
 
-    public CalcHeadersController(LibreOfficeMainActivity context, final LayerView layerView) {
+    public CalcHeadersController(MainActivity context, final LayerView layerView) {
         mContext = context;
         mContext.getDocumentOverlay().setCalcHeadersController(this);
         mCalcRowHeadersView = context.findViewById(R.id.calc_header_row);
@@ -92,7 +92,7 @@ public class CalcHeadersController {
                     LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND, ".uno:EnterString", rootJson.toString()));
                     mContext.hideSoftKeyboard();
                     layerView.requestFocus();
-                    LibreOfficeMainActivity.setDocumentChanged(true);
+                    MainActivity.setDocumentChanged(true);
                 }
                 return true;
             }
@@ -134,7 +134,7 @@ public class CalcHeadersController {
                 public void onClick(View v) {
                     LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND, ".uno:Insert"+tempName+"s"));
                     tempView.dismissPopupWindow();
-                    LibreOfficeMainActivity.setDocumentChanged(true);
+                    MainActivity.setDocumentChanged(true);
                 }
             });
             headerPopupView.findViewById(R.id.calc_header_popup_delete).setOnClickListener(new View.OnClickListener() {
@@ -142,7 +142,7 @@ public class CalcHeadersController {
                 public void onClick(View v) {
                     LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND, ".uno:Delete"+tempName+"s"));
                     tempView.dismissPopupWindow();
-                    LibreOfficeMainActivity.setDocumentChanged(true);
+                    MainActivity.setDocumentChanged(true);
                 }
             });
             headerPopupView.findViewById(R.id.calc_header_popup_hide).setOnClickListener(new View.OnClickListener() {
@@ -150,7 +150,7 @@ public class CalcHeadersController {
                 public void onClick(View v) {
                     LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND, ".uno:Hide"+tempName));
                     tempView.dismissPopupWindow();
-                    LibreOfficeMainActivity.setDocumentChanged(true);
+                    MainActivity.setDocumentChanged(true);
                 }
             });
             headerPopupView.findViewById(R.id.calc_header_popup_show).setOnClickListener(new View.OnClickListener() {
@@ -158,7 +158,7 @@ public class CalcHeadersController {
                 public void onClick(View v) {
                     LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND, ".uno:Show"+tempName));
                     tempView.dismissPopupWindow();
-                    LibreOfficeMainActivity.setDocumentChanged(true);
+                    MainActivity.setDocumentChanged(true);
                 }
             });
             headerPopupView.findViewById(R.id.calc_header_popup_optimal_length).setOnClickListener(new View.OnClickListener() {
@@ -189,7 +189,7 @@ public class CalcHeadersController {
                     String text = ((EditText)headerPopupView.findViewById(R.id.calc_header_popup_optimal_length_text)).getText().toString();
                     tempView.sendOptimalLengthRequest(text);
                     tempView.dismissPopupWindow();
-                    LibreOfficeMainActivity.setDocumentChanged(true);
+                    MainActivity.setDocumentChanged(true);
                 }
             });
             headerPopupView.findViewById(R.id.calc_header_popup_adjust_length).setOnClickListener(new View.OnClickListener() {
@@ -197,7 +197,7 @@ public class CalcHeadersController {
                 public void onClick(View v) {
                     mContext.getDocumentOverlay().showAdjustLengthLine(tempView == mCalcRowHeadersView, tempView);
                     tempView.dismissPopupWindow();
-                    LibreOfficeMainActivity.setDocumentChanged(true);
+                    MainActivity.setDocumentChanged(true);
                 }
             });
             ((Button)headerPopupView.findViewById(R.id.calc_header_popup_adjust_length))

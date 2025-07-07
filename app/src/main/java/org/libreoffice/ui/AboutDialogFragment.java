@@ -63,7 +63,7 @@ public class AboutDialogFragment extends DialogFragment {
     private void loadFromAbout(int resourceId) {
         Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + resourceId));
         String packageName = getActivity().getApplicationContext().getPackageName();
-        ComponentName componentName = new ComponentName(packageName, LibreOfficeMainActivity.class.getName());
+        ComponentName componentName = new ComponentName(packageName, MainActivity.class.getName());
         i.setComponent(componentName);
         getActivity().startActivity(i);
     }

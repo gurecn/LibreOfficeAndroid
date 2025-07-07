@@ -19,7 +19,7 @@ import org.libreoffice.kit.DirectBufferAllocator;
 import org.libreoffice.kit.Document;
 import org.libreoffice.kit.LibreOfficeKit;
 import org.libreoffice.kit.Office;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.mozilla.gecko.gfx.BufferedCairoImage;
 import org.mozilla.gecko.gfx.CairoImage;
 import org.mozilla.gecko.gfx.IntSize;
@@ -37,7 +37,7 @@ public class LOKitTileProvider implements TileProvider {
     private Office mOffice;
     private Document mDocument;
     private final boolean mIsReady;
-    private final LibreOfficeMainActivity mContext;
+    private final MainActivity mContext;
     private final float mDPI;
     private float mWidthTwip;
     private float mHeightTwip;
@@ -49,7 +49,7 @@ public class LOKitTileProvider implements TileProvider {
      * @param messageCallback - callback for messages retrieved from LOKit
      * @param input - input path of the document
      */
-    public LOKitTileProvider(LibreOfficeMainActivity context, InvalidationHandler messageCallback, String input) {
+    public LOKitTileProvider(MainActivity context, InvalidationHandler messageCallback, String input) {
         mContext = context;
         mMessageCallback = messageCallback;
         LibreOfficeKit.init(mContext);
@@ -630,7 +630,7 @@ public class LOKitTileProvider implements TileProvider {
     private void setGraphicSelection(int type, PointF documentCoordinate) {
         int x = (int) pixelToTwip(documentCoordinate.x, mDPI);
         int y = (int) pixelToTwip(documentCoordinate.y, mDPI);
-        LibreOfficeMainActivity.setDocumentChanged(true);
+        MainActivity.setDocumentChanged(true);
         mDocument.setGraphicSelection(type, x, y);
     }
 

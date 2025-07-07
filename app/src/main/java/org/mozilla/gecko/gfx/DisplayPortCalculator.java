@@ -6,7 +6,7 @@ import android.util.Log;
 
 import org.json.JSONArray;
 import org.libreoffice.manager.LOKitShell;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.mozilla.gecko.util.FloatUtils;
 
 import java.util.Map;
@@ -32,9 +32,9 @@ final class DisplayPortCalculator {
     private static final String PREF_DISPLAYPORT_PB_VELOCITY_THRESHOLD = "gfx.displayport.strategy_pb.threshold";
 
     private DisplayPortStrategy sStrategy;
-    private final LibreOfficeMainActivity mMainActivity;
+    private final MainActivity mMainActivity;
 
-    DisplayPortCalculator(LibreOfficeMainActivity context) {
+    DisplayPortCalculator(MainActivity context) {
         this.mMainActivity = context;
         sStrategy = new VelocityBiasStrategy(mMainActivity, null);
     }
@@ -338,7 +338,7 @@ final class DisplayPortCalculator {
         private final float DANGER_ZONE_INCR_X_MULTIPLIER;
         private final float DANGER_ZONE_INCR_Y_MULTIPLIER;
 
-        VelocityBiasStrategy(LibreOfficeMainActivity context, Map<String, Integer> prefs) {
+        VelocityBiasStrategy(MainActivity context, Map<String, Integer> prefs) {
             SIZE_MULTIPLIER = getFloatPref(prefs, PREF_DISPLAYPORT_VB_MULTIPLIER, 2000);
             VELOCITY_THRESHOLD = LOKitShell.getDpi(context) * getFloatPref(prefs, PREF_DISPLAYPORT_VB_VELOCITY_THRESHOLD, 32);
             REVERSE_BUFFER = getFloatPref(prefs, PREF_DISPLAYPORT_VB_REVERSE_BUFFER, 200);
@@ -454,7 +454,7 @@ final class DisplayPortCalculator {
         private final float VELOCITY_EXPANSION_THRESHOLD;
 
 
-        DynamicResolutionStrategy(LibreOfficeMainActivity context, Map<String, Integer> prefs) {
+        DynamicResolutionStrategy(MainActivity context, Map<String, Integer> prefs) {
             // ignore prefs for now
             VELOCITY_EXPANSION_THRESHOLD = LOKitShell.getDpi(context) / 16f;
             VELOCITY_FAST_THRESHOLD = VELOCITY_EXPANSION_THRESHOLD * 2.0f;
@@ -657,7 +657,7 @@ final class DisplayPortCalculator {
         private int mMinFramesToDraw;   // minimum number of frames we take to draw
         private int mMaxFramesToDraw;   // maximum number of frames we take to draw
 
-        PredictionBiasStrategy(LibreOfficeMainActivity context, Map<String, Integer> prefs) {
+        PredictionBiasStrategy(MainActivity context, Map<String, Integer> prefs) {
             VELOCITY_THRESHOLD = LOKitShell.getDpi(context) * getFloatPref(prefs, PREF_DISPLAYPORT_PB_VELOCITY_THRESHOLD, 16);
             resetPageState();
         }

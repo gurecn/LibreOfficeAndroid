@@ -15,7 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.libreoffice.data.LOEvent;
 import org.libreoffice.manager.LOKitShell;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.libreoffice.canvas.CalcHeaderCell;
 import org.libreoffice.kit.Document;
 import org.mozilla.gecko.gfx.ImmutableViewportMetrics;
@@ -192,7 +192,7 @@ public class CalcHeadersView extends View {
 
     public void showHeaderPopup(PointF point) {
         if (mPopupWindow == null ||
-                !LibreOfficeMainActivity.isExperimentalMode()) return;
+                !MainActivity.isExperimentalMode()) return;
         if (mIsRow) {
             mPopupWindow.showAsDropDown(this, getWidth()*3/2, -getHeight()+(int)point.y);
         } else {

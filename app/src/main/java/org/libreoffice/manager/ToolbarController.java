@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import org.libreoffice.R;
 import org.libreoffice.data.LOEvent;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 
 /**
  * Controls the changes to the toolbar.
@@ -21,7 +21,7 @@ public class ToolbarController implements Toolbar.OnMenuItemClickListener {
     private static final String LOGTAG = ToolbarController.class.getSimpleName();
     private final Toolbar mToolbarTop;
 
-    private final LibreOfficeMainActivity mContext;
+    private final MainActivity mContext;
     private final Menu mMainMenu;
 
     private boolean isEditModeOn = false;
@@ -29,11 +29,11 @@ public class ToolbarController implements Toolbar.OnMenuItemClickListener {
     ClipboardManager clipboardManager;
     ClipData clipData;
 
-    public ToolbarController(LibreOfficeMainActivity context, Toolbar toolbarTop) {
+    public ToolbarController(MainActivity context, Toolbar toolbarTop) {
         mToolbarTop = toolbarTop;
         mContext = context;
 
-        mToolbarTop.inflateMenu(R.menu.main);
+        mToolbarTop.inflateMenu(R.menu.main_menu);
         mToolbarTop.setOnMenuItemClickListener(this);
         switchToViewMode();
 
@@ -75,7 +75,7 @@ public class ToolbarController implements Toolbar.OnMenuItemClickListener {
             @Override
             public void run() {
                 mMainMenu.setGroupVisible(R.id.group_edit_actions, true);
-                mMainMenu.findItem(R.id.action_UNO_commands).setVisible(LibreOfficeMainActivity.isDeveloperMode() || mMainMenu.findItem(R.id.action_UNO_commands) == null);
+                mMainMenu.findItem(R.id.action_UNO_commands).setVisible(MainActivity.isDeveloperMode() || mMainMenu.findItem(R.id.action_UNO_commands) == null);
                 if(mContext.getTileProvider() != null && mContext.getTileProvider().isSpreadsheet()){
                     mMainMenu.setGroupVisible(R.id.group_spreadsheet_options, true);
                 } else if(mContext.getTileProvider() != null && mContext.getTileProvider().isPresentation()){
@@ -212,13 +212,13 @@ public class ToolbarController implements Toolbar.OnMenuItemClickListener {
         } else if (itemId == R.id.action_paste) {
             clipData = clipboardManager.getPrimaryClip();
             ClipData.Item clipItem = clipData.getItemAt(0);
-            LibreOfficeMainActivity.setDocumentChanged(true);
+            MainActivity.setDocumentChanged(true);
             return mContext.getTileProvider().paste("text/plain;charset=utf-16", clipItem.getText().toString());
         } else if (itemId == R.id.action_cut) {
             clipData = ClipData.newPlainText("clipboard data", clipboardText);
             clipboardManager.setPrimaryClip(clipData);
             LOKitShell.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DEL));
-            LibreOfficeMainActivity.setDocumentChanged(true);
+            MainActivity.setDocumentChanged(true);
             return true;
         } else if (itemId == R.id.action_UNO_commands) {
             mContext.showUNOCommandsToolbar();
@@ -228,10 +228,10 @@ public class ToolbarController implements Toolbar.OnMenuItemClickListener {
     }
 
     public void setupToolbars() {
-        if (LibreOfficeMainActivity.isExperimentalMode()) {
-            boolean enableSaveEntry = !LibreOfficeMainActivity.isReadOnlyMode() && mContext.hasLocationForSave();
+        if (MainActivity.isExperimentalMode()) {
+            boolean enableSaveEntry = !MainActivity.isReadOnlyMode() && mContext.hasLocationForSave();
             enableMenuItem(R.id.action_save, enableSaveEntry);
-            if (LibreOfficeMainActivity.isReadOnlyMode()) {
+            if (MainActivity.isReadOnlyMode()) {
                 // show message in case experimental mode is enabled (i.e. editing is supported in general),
                 // but current document is readonly
                 Toast.makeText(mContext, mContext.getString(R.string.readonly_file), Toast.LENGTH_LONG).show();

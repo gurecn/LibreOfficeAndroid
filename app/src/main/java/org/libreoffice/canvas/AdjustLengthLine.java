@@ -10,7 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.libreoffice.data.LOEvent;
 import org.libreoffice.manager.LOKitShell;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.libreoffice.overlay.CalcHeadersView;
 import org.mozilla.gecko.gfx.ImmutableViewportMetrics;
 
@@ -23,7 +23,7 @@ public class AdjustLengthLine extends CommonCanvasElement {
     private static final float STROKE_WIDTH = 4f;
     private static final float TOUCH_VICINITY_RADIUS = 24f;
 
-    private final LibreOfficeMainActivity mContext;
+    private final MainActivity mContext;
     private final CalcHeadersView mCalcHeadersView;
     private final boolean mIsRow;
     private PointF mScreenPosition;
@@ -33,7 +33,7 @@ public class AdjustLengthLine extends CommonCanvasElement {
     private PointF mStartScreenPosition;
     private int mIndex;
 
-    public AdjustLengthLine(LibreOfficeMainActivity context, CalcHeadersView view, boolean isRow, float width, float height) {
+    public AdjustLengthLine(MainActivity context, CalcHeadersView view, boolean isRow, float width, float height) {
         super();
         mContext = context;
         mCalcHeadersView = view;

@@ -12,16 +12,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.libreoffice.R;
 import org.libreoffice.data.LOEvent;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 
 import static org.libreoffice.manager.SearchController.addProperty;
 
 class UNOCommandsController implements View.OnClickListener {
-    private final LibreOfficeMainActivity mActivity;
+    private final MainActivity mActivity;
     private JSONObject mRootJSON = new JSONObject();
 
 
-    UNOCommandsController(LibreOfficeMainActivity activity) {
+    UNOCommandsController(MainActivity activity) {
         mActivity = activity;
 
         activity.findViewById(R.id.button_send_UNO_commands).setOnClickListener(this);

@@ -3,12 +3,12 @@ package org.mozilla.gecko.gfx;
 import android.graphics.PointF;
 import android.view.MotionEvent;
 import android.view.View;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 
 interface PanZoomController {
 
     class Factory {
-        static PanZoomController create(LibreOfficeMainActivity context, PanZoomTarget target, View view) {
+        static PanZoomController create(MainActivity context, PanZoomTarget target, View view) {
             return new JavaPanZoomController(context, target, view);
         }
     }

@@ -1,6 +1,6 @@
 package org.libreoffice.canvas;
 
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 
 import org.libreoffice.R;
 
@@ -8,7 +8,7 @@ import org.libreoffice.R;
  * Selection handle that is used to manipulate the cursor.
  */
 public class SelectionHandleMiddle extends SelectionHandle {
-    public SelectionHandleMiddle(LibreOfficeMainActivity context) {
+    public SelectionHandleMiddle(MainActivity context) {
         super(context, getBitmapForDrawable(context, R.drawable.handle_alias_middle));
     }
 

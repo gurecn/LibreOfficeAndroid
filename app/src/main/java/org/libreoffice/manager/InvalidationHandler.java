@@ -17,7 +17,7 @@ import org.libreoffice.canvas.SelectionHandle;
 import org.libreoffice.kit.Document;
 import org.libreoffice.kit.Office;
 import org.libreoffice.overlay.DocumentOverlay;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.mozilla.gecko.gfx.GeckoLayerClient;
 
 import java.util.ArrayList;
@@ -33,11 +33,11 @@ public class InvalidationHandler implements Document.MessageCallback, Office.Mes
     private final GeckoLayerClient mLayerClient;
     private OverlayState mState;
     private boolean mKeyEvent = false;
-    private final LibreOfficeMainActivity mContext;
+    private final MainActivity mContext;
 
     private int currentTotalPageNumber = 0; // total page number of the current document
 
-    public InvalidationHandler(LibreOfficeMainActivity context) {
+    public InvalidationHandler(MainActivity context) {
         mContext = context;
         mDocumentOverlay = mContext.getDocumentOverlay();
         mLayerClient = mContext.getLayerClient();
@@ -156,7 +156,7 @@ public class InvalidationHandler implements Document.MessageCallback, Office.Mes
                     public void run() {
                         mContext.getTileProvider().resetParts();
                         mContext.getDocumentPartViewListAdapter().notifyDataSetChanged();
-                        LibreOfficeMainActivity.setDocumentChanged(true);
+                        MainActivity.setDocumentChanged(true);
                         Toast.makeText(mContext, mContext.getString(R.string.part_name_changed), Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -167,7 +167,7 @@ public class InvalidationHandler implements Document.MessageCallback, Office.Mes
                     public void run() {
                         mContext.getTileProvider().resetParts();
                         mContext.getDocumentPartViewListAdapter().notifyDataSetChanged();
-                        LibreOfficeMainActivity.setDocumentChanged(true);
+                        MainActivity.setDocumentChanged(true);
                         Toast.makeText(mContext, mContext.getString(R.string.part_deleted), Toast.LENGTH_SHORT).show();
                     }
                 });

@@ -4,14 +4,8 @@ import android.app.Activity;
 import android.content.pm.ApplicationInfo;
 import android.content.res.AssetManager;
 import android.util.Log;
-
-import java.io.InputStream;
 import java.nio.ByteBuffer;
 
-// Native methods in this class are all implemented in
-// sal/android/lo-bootstrap.c as the lo-bootstrap library is loaded with
-// System.loadLibrary() and Android's JNI works only to such libraries, it
-// seems.
 public final class LibreOfficeKit
 {
     private static final String LOGTAG = LibreOfficeKit.class.getSimpleName();

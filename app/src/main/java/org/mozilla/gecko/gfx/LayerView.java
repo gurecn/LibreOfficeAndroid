@@ -18,7 +18,7 @@ import android.view.inputmethod.InputConnection;
 import android.widget.FrameLayout;
 import org.libreoffice.data.LOEvent;
 import org.libreoffice.manager.LOKitShell;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.mozilla.gecko.OnInterceptTouchListener;
 import org.mozilla.gecko.OnSlideSwipeListener;
 
@@ -41,11 +41,11 @@ public class LayerView extends FrameLayout {
 
     private Listener mListener;
     private OnInterceptTouchListener mTouchIntercepter;
-    private final LibreOfficeMainActivity mContext;
+    private final MainActivity mContext;
 
     public LayerView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext = (LibreOfficeMainActivity) context;
+        mContext = (MainActivity) context;
 
         mSurfaceView = new SurfaceView(context);
         addView(mSurfaceView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);

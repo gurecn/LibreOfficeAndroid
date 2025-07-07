@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.libreoffice.R;
 import org.libreoffice.canvas.AdjustLengthLine;
 import org.libreoffice.canvas.CalcSelectionBox;
@@ -96,14 +96,14 @@ public class DocumentOverlayView extends View implements View.OnTouchListener {
             mSelectionPaint.setAlpha(50);
             mSelectionsVisible = false;
 
-            mGraphicSelection = new GraphicSelection((LibreOfficeMainActivity) getContext());
+            mGraphicSelection = new GraphicSelection((MainActivity) getContext());
             mGraphicSelection.setVisible(false);
 
             postDelayed(cursorAnimation, CURSOR_BLINK_TIME);
 
-            mHandleMiddle = new SelectionHandleMiddle((LibreOfficeMainActivity) getContext());
-            mHandleStart = new SelectionHandleStart((LibreOfficeMainActivity) getContext());
-            mHandleEnd = new SelectionHandleEnd((LibreOfficeMainActivity) getContext());
+            mHandleMiddle = new SelectionHandleMiddle((MainActivity) getContext());
+            mHandleStart = new SelectionHandleStart((MainActivity) getContext());
+            mHandleEnd = new SelectionHandleEnd((MainActivity) getContext());
 
             mInitialized = true;
         }
@@ -502,7 +502,7 @@ public class DocumentOverlayView extends View implements View.OnTouchListener {
 
     public void setCalcHeadersController(CalcHeadersController calcHeadersController) {
         mCalcHeadersController = calcHeadersController;
-        mCalcSelectionBox = new CalcSelectionBox((LibreOfficeMainActivity) getContext());
+        mCalcSelectionBox = new CalcSelectionBox((MainActivity) getContext());
     }
 
     public void showCellSelection(RectF cellCursorRect) {
@@ -532,7 +532,7 @@ public class DocumentOverlayView extends View implements View.OnTouchListener {
     }
 
     public void showAdjustLengthLine(boolean isRow, final CalcHeadersView view) {
-        mAdjustLengthLine = new AdjustLengthLine((LibreOfficeMainActivity) getContext(), view, isRow, getWidth(), getHeight());
+        mAdjustLengthLine = new AdjustLengthLine((MainActivity) getContext(), view, isRow, getWidth(), getHeight());
         ImmutableViewportMetrics metrics = mLayerView.getViewportMetrics();
         RectF position = convertToScreen(mCalcSelectionBox.mDocumentPosition, metrics.viewportRectLeft, metrics.viewportRectTop, metrics.zoomFactor);
         mAdjustLengthLine.setScreenRect(position);

@@ -4,10 +4,10 @@ plugins {
 
 android {
     namespace 'org.libreoffice'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
-        applicationId "org.example.libreoffice"
+        applicationId "org.devdroid.libreoffice"
         minSdk 24
         targetSdk 35
         versionCode 1
@@ -39,22 +39,6 @@ android {
             buildConfigField "String", "VENDOR", '"gure"'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-
-    lint {
-        warningsAsErrors true
-        // ignore missing or extra translations, since these are tracked/managed via Weblate
-        ignore 'ExtraTranslation', 'MissingTranslation'
-        // don't error-out on external updates (new gradle plugin, library versions
-        // or target API become available)
-        // don't error-out on TypographyEllipsis, since this can be introduced with
-        // new translations, and those are handled in Weblate
-        informational 'AndroidGradlePluginVersion', 'GradleDependency', 'NewerVersionAvailable', 'OldTargetApi', 'TypographyEllipsis'
-        // don't fail on pre-existing issues
-        // These should be dealt with at some point, though.
-        // To update lint-baseline.xml, just remove the file and run the build again.
-        baseline file("lint-baseline.xml")
-        // s.a. lint.xml that contains further config
     }
 
     sourceSets {

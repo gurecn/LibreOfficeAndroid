@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.PointF;
 
 import org.libreoffice.manager.LOKitShell;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.mozilla.gecko.gfx.ImmutableViewportMetrics;
 
 /**
@@ -18,9 +18,9 @@ public abstract class SelectionHandle extends BitmapHandle {
     private final PointF mDragDocumentPosition = new PointF();
     private long mLastTime = 0;
 
-    private final LibreOfficeMainActivity mContext;
+    private final MainActivity mContext;
 
-    public SelectionHandle(LibreOfficeMainActivity context, Bitmap bitmap) {
+    public SelectionHandle(MainActivity context, Bitmap bitmap) {
         super(bitmap);
         mContext = context;
     }

@@ -60,7 +60,7 @@ import java.util.UUID;
 /**
  * Main activity of the LibreOffice App. It is started in the UI thread.
  */
-public class LibreOfficeMainActivity extends AppCompatActivity implements SettingsListenerModel.OnSettingsPreferenceChangedListener {
+public class MainActivity extends AppCompatActivity implements SettingsListenerModel.OnSettingsPreferenceChangedListener {
 
     private static final String LOGTAG = "LibreOfficeMainActivity";
     public static final String ENABLE_EXPERIMENTAL_PREFS_KEY = "ENABLE_EXPERIMENTAL";
@@ -173,9 +173,9 @@ public class LibreOfficeMainActivity extends AppCompatActivity implements Settin
             }
 
             LOKitShell.sendLoadEvent(mTempFile.getPath());
-        } else if (getIntent().getStringExtra(LibreOfficeUIActivity.NEW_DOC_TYPE_KEY) != null) {
+        } else if (getIntent().getStringExtra(HomeActivity.NEW_DOC_TYPE_KEY) != null) {
             // New document type string is not null, meaning we want to open a new document
-            String newDocumentType = getIntent().getStringExtra(LibreOfficeUIActivity.NEW_DOC_TYPE_KEY);
+            String newDocumentType = getIntent().getStringExtra(HomeActivity.NEW_DOC_TYPE_KEY);
             // create a temporary local file, will be copied to the actual URI when saving
             loadNewDocument(newDocumentType);
             toolbarTop.setTitle(getString(R.string.default_document_name));
@@ -375,10 +375,10 @@ public class LibreOfficeMainActivity extends AppCompatActivity implements Settin
             e.printStackTrace();
         }
         if (copyOK) {
-            runOnUiThread(() -> Toast.makeText(LibreOfficeMainActivity.this, R.string.message_saved, Toast.LENGTH_SHORT).show());
+            runOnUiThread(() -> Toast.makeText(MainActivity.this, R.string.message_saved, Toast.LENGTH_SHORT).show());
             setDocumentChanged(false);
         } else {
-            runOnUiThread(() -> Toast.makeText(LibreOfficeMainActivity.this, R.string.message_saving_failed, Toast.LENGTH_SHORT).show());
+            runOnUiThread(() -> Toast.makeText(MainActivity.this, R.string.message_saving_failed, Toast.LENGTH_SHORT).show());
         }
     }
 
@@ -624,7 +624,7 @@ public class LibreOfficeMainActivity extends AppCompatActivity implements Settin
     }
 
     public void showAlertDialog(String message) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LibreOfficeMainActivity.this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
         alertDialogBuilder.setTitle(R.string.error);
         alertDialogBuilder.setMessage(message);
         alertDialogBuilder.setNeutralButton(R.string.alert_ok, (dialog, id) -> finish());
@@ -844,7 +844,7 @@ public class LibreOfficeMainActivity extends AppCompatActivity implements Settin
     /**
      * Copies everything from the given InputStream to the given URI and closes the
      * InputStream in the end.
-     * @see LibreOfficeMainActivity#copyUriToStream(Uri, OutputStream)
+     * @see MainActivity#copyUriToStream(Uri, OutputStream)
      *      which does the same thing the other way around.
      */
     private boolean copyStreamToUri(final InputStream inputStream, final Uri outputUri) {

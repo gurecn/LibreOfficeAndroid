@@ -1,6 +1,6 @@
 package org.mozilla.gecko.gfx;
 
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.DisplayMetrics;
@@ -13,7 +13,7 @@ public class GeckoLayerClient implements PanZoomTarget {
 
     private LayerRenderer mLayerRenderer;
 
-    private final LibreOfficeMainActivity mContext;
+    private final MainActivity mContext;
     private IntSize mScreenSize;
     private DisplayPortMetrics mDisplayPort;
 
@@ -44,7 +44,7 @@ public class GeckoLayerClient implements PanZoomTarget {
     private LayerView mView;
     private final DisplayPortCalculator mDisplayPortCalculator;
 
-    public GeckoLayerClient(LibreOfficeMainActivity context) {
+    public GeckoLayerClient(MainActivity context) {
         // we can fill these in with dummy values because they are always written
         // to before being read
         mContext = context;

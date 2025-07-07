@@ -21,7 +21,7 @@ public class SettingsActivity extends Activity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.libreoffice_preferences);
+            addPreferencesFromResource(R.xml.preferences);
         }
 
         @Override

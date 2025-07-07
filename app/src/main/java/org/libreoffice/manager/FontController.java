@@ -17,7 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.libreoffice.data.LOEvent;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.libreoffice.R;
 import org.libreoffice.adapter.ColorPaletteAdapter;
 import org.libreoffice.adapter.ColorPickerAdapter;
@@ -33,7 +33,7 @@ public class FontController implements AdapterView.OnItemSelectedListener {
 
     private boolean mFontNameSpinnerSet = false;
     private boolean mFontSizeSpinnerSet = false;
-    private final LibreOfficeMainActivity mActivity;
+    private final MainActivity mActivity;
     private final ArrayList<String> mFontList = new ArrayList<>();
     private final ArrayList<String> mFontSizes = new ArrayList<>();
     private final HashMap<String, ArrayList<String>> mAllFontSizes = new HashMap<>();
@@ -41,7 +41,7 @@ public class FontController implements AdapterView.OnItemSelectedListener {
     private String mCurrentFontSelected = null;
     private String mCurrentFontSizeSelected = null;
 
-    public FontController(LibreOfficeMainActivity activity) {
+    public FontController(MainActivity activity) {
         mActivity = activity;
     }
     private BottomSheetBehavior colorPickerBehavior;

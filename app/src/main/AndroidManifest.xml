@@ -2,7 +2,6 @@
 <manifest xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-feature android:glEsVersion="0x00020000" android:required="true" />
-    <uses-feature android:name="android.hardware.usb.host" android:required="false"/>
     <uses-feature android:name="android.hardware.camera" android:required="false"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
@@ -17,7 +16,7 @@
         android:largeHeap="false">
 
         <activity
-            android:name=".ui.LibreOfficeMainActivity"
+            android:name=".ui.MainActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:windowSoftInputMode="adjustResize"
             android:exported="true">
@@ -27,11 +26,8 @@
                 <action android:name="android.intent.action.EDIT" />
                 <action android:name="android.intent.action.PICK" />
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:scheme="file"/>
                 <data android:scheme="content"/>
-
-                <!-- Please keep this in sync with FileUtilities.java. -->
                 <!-- ODF -->
                 <data android:mimeType="application/vnd.oasis.opendocument.text" />
                 <data android:mimeType="application/vnd.oasis.opendocument.graphics" />
@@ -41,14 +37,12 @@
                 <data android:mimeType="application/vnd.oasis.opendocument.graphics-flat-xml" />
                 <data android:mimeType="application/vnd.oasis.opendocument.presentation-flat-xml" />
                 <data android:mimeType="application/vnd.oasis.opendocument.spreadsheet-flat-xml" />
-
                 <!-- ODF templates -->
                 <data android:mimeType="application/vnd.oasis.opendocument.text-template"/>
                 <data android:mimeType="application/vnd.oasis.opendocument.spreadsheet-template"/>
                 <data android:mimeType="application/vnd.oasis.opendocument.graphics-template"/>
                 <!-- Seems at least Android 5.0 does not recognize this as the mime type of .otp files. -->
                 <data android:mimeType="application/vnd.oasis.opendocument.presentation-template"/>
-
                 <!-- MS -->
                 <data android:mimeType="application/rtf" />
                 <data android:mimeType="text/rtf" />
@@ -58,18 +52,15 @@
                 <data android:mimeType="application/vnd.visio" />
                 <data android:mimeType="application/vnd.visio.xml" />
                 <data android:mimeType="application/x-mspublisher" />
-
                 <!-- OOXML -->
                 <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
                 <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.presentation" />
                 <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.slideshow" />
                 <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
-
                 <!-- OOXML templates -->
                 <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.template"/>
                 <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.template"/>
                 <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.template"/>
-
                 <!-- OTHER -->
                 <data android:mimeType="text/csv"/>
                 <data android:mimeType="text/comma-separated-values"/>
@@ -81,7 +72,6 @@
                 <data android:mimeType="image/x-svm" />
                 <data android:mimeType="image/x-wmf" />
                 <data android:mimeType="image/svg+xml" />
-
                 <data android:mimeType="image/gif" />
                 <data android:mimeType="image/jpg" />
                 <data android:mimeType="image/jpeg" />
@@ -91,7 +81,6 @@
                 <data android:mimeType="application/vnd.ms-visio.drawing" />
                 <data android:mimeType="text/plain" />
                 <data android:mimeType="application/pdf" />
-
             </intent-filter>
         </activity>
 
@@ -101,7 +90,7 @@
         </activity>
 
         <!-- Document Browser Activity -->
-        <activity android:name=".ui.LibreOfficeUIActivity"
+        <activity android:name=".ui.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -114,7 +103,7 @@
             tools:ignore="DiscouragedApi">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.LibreOfficeMainActivity" />
+                android:value=".ui.MainActivity" />
         </activity>
 
         <provider

@@ -1,6 +1,6 @@
 package org.libreoffice.canvas;
 
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 
 import org.libreoffice.R;
 
@@ -8,7 +8,7 @@ import org.libreoffice.R;
  * Selection handle for showing and manipulating the end of a selection.
  */
 public class SelectionHandleEnd extends SelectionHandle {
-    public SelectionHandleEnd(LibreOfficeMainActivity context) {
+    public SelectionHandleEnd(MainActivity context) {
         super(context, getBitmapForDrawable(context, R.drawable.handle_alias_end));
     }
 

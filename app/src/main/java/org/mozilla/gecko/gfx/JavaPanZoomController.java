@@ -8,7 +8,7 @@ import android.view.InputDevice;
 import android.view.MotionEvent;
 import android.view.View;
 import org.libreoffice.manager.LOKitShell;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.mozilla.gecko.ZoomConstraints;
 import org.mozilla.gecko.util.FloatUtils;
 import java.util.Timer;
@@ -66,7 +66,7 @@ class JavaPanZoomController
     private final Axis mX;
     private final Axis mY;
     private final TouchEventHandler mTouchEventHandler;
-    private final LibreOfficeMainActivity mContext;
+    private final MainActivity mContext;
 
     /* The timer that handles flings or bounces. */
     private Timer mAnimationTimer;
@@ -81,7 +81,7 @@ class JavaPanZoomController
     /* Whether or not to wait for a double-tap before dispatching a single-tap */
     private boolean mWaitForDoubleTap;
 
-    JavaPanZoomController(LibreOfficeMainActivity context, PanZoomTarget target, View view) {
+    JavaPanZoomController(MainActivity context, PanZoomTarget target, View view) {
         mContext = context;
         PAN_THRESHOLD = 1/16f * LOKitShell.getDpi(view.getContext());
         MAX_SCROLL = 0.075f * LOKitShell.getDpi(view.getContext());

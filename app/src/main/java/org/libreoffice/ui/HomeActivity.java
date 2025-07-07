@@ -42,7 +42,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class LibreOfficeUIActivity extends AppCompatActivity implements View.OnClickListener{
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
     public enum DocumentType {
         WRITER,
         CALC,
@@ -51,7 +51,7 @@ public class LibreOfficeUIActivity extends AppCompatActivity implements View.OnC
         PDF,
         INVALID
     }
-    private static final String LOGTAG = LibreOfficeUIActivity.class.getSimpleName();
+    private static final String LOGTAG = HomeActivity.class.getSimpleName();
     public static final String EXPLORER_PREFS_KEY = "EXPLORER_PREFS";
     private static final String RECENT_DOCUMENTS_KEY = "RECENT_DOCUMENT_URIS";
     private static final String RECENT_DOCUMENTS_DELIMITER = " ";
@@ -129,7 +129,7 @@ public class LibreOfficeUIActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_document_browser);
+        setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         fabOpenAnimation = AnimationUtils.loadAnimation(this, R.anim.fab_open);
@@ -154,7 +154,7 @@ public class LibreOfficeUIActivity extends AppCompatActivity implements View.OnC
         editFAB = findViewById(R.id.editFAB);
         editFAB.setOnClickListener(this);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final boolean bEditingEnabled = preferences.getBoolean(LibreOfficeMainActivity.ENABLE_EXPERIMENTAL_PREFS_KEY, false);
+        final boolean bEditingEnabled = preferences.getBoolean(MainActivity.ENABLE_EXPERIMENTAL_PREFS_KEY, false);
         editFAB.setVisibility(bEditingEnabled ? View.VISIBLE : View.INVISIBLE);
         impressFAB = findViewById(R.id.newImpressFAB);
         impressFAB.setOnClickListener(this);
@@ -244,7 +244,7 @@ public class LibreOfficeUIActivity extends AppCompatActivity implements View.OnC
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         addDocumentToRecents(documentUri);
         String packageName = getApplicationContext().getPackageName();
-        ComponentName componentName = new ComponentName(packageName, LibreOfficeMainActivity.class.getName());
+        ComponentName componentName = new ComponentName(packageName, MainActivity.class.getName());
         intent.setComponent(componentName);
         startActivity(intent);
     }
@@ -262,7 +262,7 @@ public class LibreOfficeUIActivity extends AppCompatActivity implements View.OnC
         } else {
             return;
         }
-        Intent intent = new Intent(LibreOfficeUIActivity.this, LibreOfficeMainActivity.class);
+        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
         intent.putExtra(NEW_DOC_TYPE_KEY, newDocumentType);
         startActivity(intent);
     }
@@ -316,7 +316,7 @@ public class LibreOfficeUIActivity extends AppCompatActivity implements View.OnC
                 };
                 Intent intent = new Intent(Intent.ACTION_VIEW, docUri);
                 String packageName = this.getApplicationContext().getPackageName();
-                ComponentName componentName = new ComponentName(packageName, LibreOfficeMainActivity.class.getName());
+                ComponentName componentName = new ComponentName(packageName, MainActivity.class.getName());
                 intent.setComponent(componentName);
                 ShortcutInfo shortcut = new ShortcutInfo.Builder(this, filename)
                         .setShortLabel(filename)

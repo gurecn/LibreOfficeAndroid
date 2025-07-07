@@ -7,7 +7,7 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 
 import org.libreoffice.manager.LOKitShell;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.mozilla.gecko.gfx.ImmutableViewportMetrics;
 
 /**
@@ -21,13 +21,13 @@ public class CalcSelectionBox extends CommonCanvasElement {
 
     public RectF mDocumentPosition;
 
-    private final LibreOfficeMainActivity mContext;
+    private final MainActivity mContext;
     private RectF mScreenPosition;
     private long mLastTime = 0;
     private final Paint mPaint;
     private final Paint mCirclePaint;
 
-    public CalcSelectionBox(LibreOfficeMainActivity context) {
+    public CalcSelectionBox(MainActivity context) {
         mContext = context;
         mScreenPosition = new RectF();
         mDocumentPosition = new RectF();

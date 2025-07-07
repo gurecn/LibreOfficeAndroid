@@ -29,7 +29,7 @@ public class PresentationActivity extends AppCompatActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
 
-        setContentView(R.layout.presentation_mode);
+        setContentView(R.layout.activity_presentation);
 
         // get intent and url
         Intent intent = getIntent();

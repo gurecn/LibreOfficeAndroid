@@ -12,7 +12,7 @@ import org.libreoffice.data.LOEvent;
 import org.libreoffice.utils.ThumbnailCreator;
 import org.libreoffice.application.LibreOfficeApplication;
 import org.libreoffice.canvas.SelectionHandle;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.mozilla.gecko.gfx.ComposedTileLayer;
 
 /**
@@ -20,7 +20,7 @@ import org.mozilla.gecko.gfx.ComposedTileLayer;
  */
 public class LOKitShell {
     public static float getDpi(Context context) {
-        LOKitTileProvider tileProvider = ((LibreOfficeMainActivity)context).getTileProvider();
+        LOKitTileProvider tileProvider = ((MainActivity)context).getTileProvider();
         if (tileProvider != null && tileProvider.isSpreadsheet())
             return 96f;
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
@@ -32,7 +32,7 @@ public class LOKitShell {
         return LibreOfficeApplication.getMainHandler();
     }
 
-    public static void showProgressSpinner(final LibreOfficeMainActivity context) {
+    public static void showProgressSpinner(final MainActivity context) {
         getMainHandler().post(new Runnable() {
             @Override
             public void run() {
@@ -41,7 +41,7 @@ public class LOKitShell {
         });
     }
 
-    public static void hideProgressSpinner(final LibreOfficeMainActivity context) {
+    public static void hideProgressSpinner(final MainActivity context) {
         getMainHandler().post(new Runnable() {
             @Override
             public void run() {
@@ -56,7 +56,7 @@ public class LOKitShell {
     }
 
     public static boolean isEditingEnabled() {
-        return !LibreOfficeMainActivity.isReadOnlyMode();
+        return !MainActivity.isReadOnlyMode();
     }
 
     // EVENTS
@@ -65,7 +65,7 @@ public class LOKitShell {
      * Make sure LOKitThread is running and send event to it.
      */
     public static void sendEvent(LOEvent event) {
-        LibreOfficeMainActivity.loKitThread.queueEvent(event);
+        MainActivity.loKitThread.queueEvent(event);
     }
 
     public static void sendThumbnailEvent(ThumbnailCreator.ThumbnailCreationTask task) {
@@ -151,7 +151,7 @@ public class LOKitShell {
      * Move the viewport to the desired point (top-left), and change the zoom level.
      * Ensure this runs on the UI thread.
      */
-    public static void moveViewportTo(final LibreOfficeMainActivity context, final PointF position, final Float zoom) {
+    public static void moveViewportTo(final MainActivity context, final PointF position, final Float zoom) {
         context.getLayerClient().post(new Runnable() {
             @Override
             public void run() {

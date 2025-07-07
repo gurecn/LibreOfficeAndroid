@@ -16,9 +16,9 @@ import java.util.List;
 
 class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.ViewHolder> {
 
-    private final LibreOfficeUIActivity mActivity;
+    private final HomeActivity mActivity;
     private final List<RecentFile> recentFiles;
-    RecentFilesAdapter(LibreOfficeUIActivity activity, List<RecentFile> recentFiles) {
+    RecentFilesAdapter(HomeActivity activity, List<RecentFile> recentFiles) {
         this.mActivity = activity;
         this.recentFiles = recentFiles;
     }

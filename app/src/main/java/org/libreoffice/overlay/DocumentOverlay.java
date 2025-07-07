@@ -4,7 +4,7 @@ import android.graphics.RectF;
 import android.util.Log;
 
 import org.libreoffice.manager.LOKitShell;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.libreoffice.R;
 import org.libreoffice.canvas.SelectionHandle;
 import org.mozilla.gecko.gfx.Layer;
@@ -58,7 +58,7 @@ public class DocumentOverlay {
         }
     }
 
-    public DocumentOverlay(LibreOfficeMainActivity context, LayerView layerView) {
+    public DocumentOverlay(MainActivity context, LayerView layerView) {
         mDocumentOverlayView = context.findViewById(R.id.text_cursor_view);
         mDocumentOverlayLayer = new DocumentOverlayLayer();
         if (mDocumentOverlayView == null) {

@@ -12,7 +12,7 @@ import org.libreoffice.data.TileIdentifier;
 import org.libreoffice.TileProvider;
 import org.libreoffice.utils.TileProviderFactory;
 import org.libreoffice.canvas.SelectionHandle;
-import org.libreoffice.ui.LibreOfficeMainActivity;
+import org.libreoffice.ui.MainActivity;
 import org.mozilla.gecko.ZoomConstraints;
 import org.mozilla.gecko.gfx.CairoImage;
 import org.mozilla.gecko.gfx.ComposedTileLayer;
@@ -31,9 +31,9 @@ public class LOKitThread extends Thread {
     private InvalidationHandler mInvalidationHandler;
     private ImmutableViewportMetrics mViewportMetrics;
     private GeckoLayerClient mLayerClient;
-    private final LibreOfficeMainActivity mContext;
+    private final MainActivity mContext;
 
-    public LOKitThread(LibreOfficeMainActivity context) {
+    public LOKitThread(MainActivity context) {
         mContext = context;
         mInvalidationHandler = null;
         TileProviderFactory.initialize();
