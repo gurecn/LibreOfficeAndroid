@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -28,7 +27,6 @@ import java.util.List;
  * Parses (interprets) and handles invalidation messages from LibreOffice.
  */
 public class InvalidationHandler implements Document.MessageCallback, Office.MessageCallback {
-    private static final String LOGTAG = InvalidationHandler.class.getSimpleName();
     private final DocumentOverlay mDocumentOverlay;
     private final GeckoLayerClient mLayerClient;
     private OverlayState mState;
@@ -112,7 +110,6 @@ public class InvalidationHandler implements Document.MessageCallback, Office.Mes
                 mDocumentOverlay.hideHandle(SelectionHandle.HandleType.END);
                 break;
             case Document.CALLBACK_SEARCH_NOT_FOUND:
-                Log.d(LOGTAG, "LOK_CALLBACK: Search not found.");
                 // this callback is never caught. Hope someone fix this.
                 break;
             case Document.CALLBACK_CELL_CURSOR:
@@ -136,8 +133,6 @@ public class InvalidationHandler implements Document.MessageCallback, Office.Mes
             case Document.CALLBACK_DOCUMENT_SIZE_CHANGED:
                 pageSizeChanged(payload);
             default:
-
-                Log.d(LOGTAG, "LOK_CALLBACK uncaught: " + messageID + " : " + payload);
         }
     }
 
@@ -309,16 +304,10 @@ public class InvalidationHandler implements Document.MessageCallback, Office.Mes
 
     private void stateChanged(String payload) {
         String[] parts = payload.split("=");
-        if (parts.length < 2) {
-            Log.e(LOGTAG, "LOK_CALLBACK_STATE_CHANGED unexpected payload: " + payload);
-            return;
-        }
+        if (parts.length < 2) {return;}
         final String value = parts[1];
         boolean pressed = Boolean.parseBoolean(value);
-        if (!mContext.getTileProvider().isReady()) {
-            Log.w(LOGTAG, "tile provider not ready, ignoring payload "+payload);
-            return;
-        }
+        if (!mContext.getTileProvider().isReady()) {return;}
         if (parts[0].equals(".uno:Bold")) {
             mContext.getFormattingController().onToggleStateChanged(Document.BOLD, pressed);
         } else if (parts[0].equals(".uno:Italic")) {
@@ -360,8 +349,6 @@ public class InvalidationHandler implements Document.MessageCallback, Office.Mes
                 // update part page rectangles stored in DocumentOverlayView object
                 LOKitShell.sendEvent(new LOEvent(LOEvent.UPDATE_PART_PAGE_RECT));
             }
-        } else {
-            Log.d(LOGTAG, "LOK_CALLBACK_STATE_CHANGED type uncatched: " + payload);
         }
     }
 

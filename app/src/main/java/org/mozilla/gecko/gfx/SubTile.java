@@ -5,7 +5,6 @@ import android.graphics.RectF;
 import android.graphics.Region;
 import android.graphics.RegionIterator;
 import android.opengl.GLES20;
-import android.util.Log;
 import org.libreoffice.data.TileIdentifier;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
@@ -98,7 +97,6 @@ public class SubTile extends Layer {
             destroyImage();
             cleanTexture();
         } catch (Exception ex) {
-            Log.e(LOGTAG, "Error clearing buffers: ", ex);
         }
     }
 

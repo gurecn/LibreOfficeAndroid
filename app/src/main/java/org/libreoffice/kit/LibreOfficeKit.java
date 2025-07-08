@@ -3,12 +3,9 @@ package org.libreoffice.kit;
 import android.app.Activity;
 import android.content.pm.ApplicationInfo;
 import android.content.res.AssetManager;
-import android.util.Log;
 import java.nio.ByteBuffer;
 
-public final class LibreOfficeKit
-{
-    private static final String LOGTAG = LibreOfficeKit.class.getSimpleName();
+public final class LibreOfficeKit {
     private static AssetManager mgr;
 
     // private constructor because instantiating would be meaningless
@@ -45,17 +42,12 @@ public final class LibreOfficeKit
 
         ApplicationInfo applicationInfo = activity.getApplicationInfo();
         String dataDir = applicationInfo.dataDir;
-        Log.i(LOGTAG, String.format("Initializing LibreOfficeKit, dataDir=%s\n", dataDir));
-
         redirectStdio(true);
 
         String cacheDir = activity.getApplication().getCacheDir().getAbsolutePath();
         String apkFile = activity.getApplication().getPackageResourcePath();
 
-        Log.i(LOGTAG, "cacheDir :" + cacheDir);
-        Log.i(LOGTAG, "apkFile :" + apkFile);
         if (!initializeNative(dataDir, cacheDir, apkFile, mgr)) {
-            Log.e(LOGTAG, "Initialize native failed!");
             return;
         }
         initializeDone = true;

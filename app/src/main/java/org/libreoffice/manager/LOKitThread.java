@@ -3,7 +3,6 @@ package org.libreoffice.manager;
 import android.graphics.Bitmap;
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.util.Log;
 import android.view.KeyEvent;
 import org.libreoffice.data.LOEvent;
 import org.libreoffice.utils.ThumbnailCreator;
@@ -23,8 +22,7 @@ import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class LOKitThread extends Thread {
-    private static final String LOGTAG = LOKitThread.class.getSimpleName();
-    private final LinkedBlockingQueue<LOEvent> mEventQueue = new LinkedBlockingQueue<LOEvent>();
+    private final LinkedBlockingQueue<LOEvent> mEventQueue = new LinkedBlockingQueue<>();
     private TileProvider mTileProvider;
     private InvalidationHandler mInvalidationHandler;
     private ImmutableViewportMetrics mViewportMetrics;
@@ -43,9 +41,8 @@ public class LOKitThread extends Thread {
     @Override
     public void run() {
         while (true) {
-            LOEvent event;
             try {
-                event = mEventQueue.take();
+                LOEvent event = mEventQueue.take();
                 processEvent(event);
             } catch (InterruptedException exception) {
                 throw new RuntimeException(exception);
@@ -166,7 +163,6 @@ public class LOKitThread extends Thread {
      */
     private void updatePartPageRectangles() {
         if (mTileProvider == null) {
-            Log.d(LOGTAG, "mTileProvider==null when calling updatePartPageRectangles");
             return;
         }
         String partPageRectString = ((LOKitTileProvider) mTileProvider).getPartPageRectangles();
@@ -240,9 +236,7 @@ public class LOKitThread extends Thread {
      * Save the currently loaded document.
      */
     private void saveDocumentAs(String filePath, String fileType, boolean bTakeOwnership) {
-       if (mTileProvider == null) {
-           Log.e(LOGTAG, "Error in saving, Tile Provider instance is null");
-       } else {
+       if (mTileProvider != null) {
            mTileProvider.saveDocumentAs(filePath, fileType, bTakeOwnership);
        }
     }
@@ -311,9 +305,7 @@ public class LOKitThread extends Thread {
                 mInvalidationHandler.changeStateTo(InvalidationHandler.OverlayState.NONE);
                 break;
             case LOEvent.UNO_COMMAND:
-                if (null == mTileProvider)
-                    Log.e(LOGTAG, "no mTileProvider when trying to process "+event.mValue+" from UNO_COMMAND "+event.mString);
-                else
+                if (null != mTileProvider)
                     mTileProvider.postUnoCommand(event.mString, event.mValue);
                 break;
             case LOEvent.UPDATE_PART_PAGE_RECT:
@@ -326,10 +318,7 @@ public class LOKitThread extends Thread {
                 updateCalcHeaders();
                 break;
             case LOEvent.UNO_COMMAND_NOTIFY:
-                if (null == mTileProvider)
-                    Log.e(LOGTAG, "no mTileProvider when trying to process "+event.mValue+" from UNO_COMMAND "+event.mString);
-                else
-                    mTileProvider.postUnoCommand(event.mString, event.mValue, event.mNotify);
+                if (null != mTileProvider) mTileProvider.postUnoCommand(event.mString, event.mValue, event.mNotify);
                 break;
             case LOEvent.REFRESH:
                 refresh(false);

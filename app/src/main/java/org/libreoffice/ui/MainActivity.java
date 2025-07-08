@@ -18,7 +18,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.text.InputType;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -708,7 +707,6 @@ public class MainActivity extends AppCompatActivity implements SettingsListenerM
     @Override
     public void settingsPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.matches(ENABLE_EXPERIMENTAL_PREFS_KEY)) {
-            Log.d(LOGTAG, "Editing Preference Changed");
             mIsExperimentalMode = sharedPreferences.getBoolean(ENABLE_EXPERIMENTAL_PREFS_KEY, false);
         }
     }

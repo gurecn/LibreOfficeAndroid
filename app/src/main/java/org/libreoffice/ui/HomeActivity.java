@@ -47,7 +47,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         PDF,
         INVALID
     }
-    private static final String LOGTAG = HomeActivity.class.getSimpleName();
     public static final String EXPLORER_PREFS_KEY = "EXPLORER_PREFS";
     private static final String RECENT_DOCUMENTS_KEY = "RECENT_DOCUMENT_URIS";
     private static final String RECENT_DOCUMENTS_DELIMITER = " ";

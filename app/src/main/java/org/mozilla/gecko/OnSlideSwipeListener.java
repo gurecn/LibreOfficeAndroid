@@ -6,15 +6,11 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.util.Log;
-
 import org.libreoffice.manager.LOKitShell;
 import org.mozilla.gecko.gfx.GeckoLayerClient;
 import org.mozilla.gecko.gfx.ImmutableViewportMetrics;
 
-
 public class OnSlideSwipeListener implements OnTouchListener {
-    private static final String LOGTAG = OnSlideSwipeListener.class.getName();
 
     private final GestureDetector mGestureDetector;
     private final GeckoLayerClient mLayerClient;
@@ -67,12 +63,10 @@ public class OnSlideSwipeListener implements OnTouchListener {
     }
 
     public void onSwipeRight() {
-        Log.d(LOGTAG, "onSwipeRight");
         LOKitShell.sendSwipeRightEvent();
     }
 
     public void onSwipeLeft() {
-        Log.d(LOGTAG, "onSwipeLeft");
         LOKitShell.sendSwipeLeftEvent();
     }
 

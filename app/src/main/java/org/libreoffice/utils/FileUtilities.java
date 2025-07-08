@@ -7,7 +7,6 @@ import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.OpenableColumns;
-import android.util.Log;
 
 public class FileUtilities {
 
@@ -106,7 +105,6 @@ public class FileUtilities {
 
     public static int getType(String filename) {
         int type = lookupExtension (filename);
-        Log.d(LOGTAG, "extn : " + filename + " -> " + type);
         return type;
     }
 
@@ -139,7 +137,6 @@ public class FileUtilities {
             }
         } catch (SecurityException e) {
             // thrown e.g. when Uri has become invalid, e.g. corresponding file has been deleted
-            Log.i(LOGTAG, "SecurityException when trying to receive display name for Uri " + docUri);
         } finally {
             if (cursor != null) {
                 cursor.close();

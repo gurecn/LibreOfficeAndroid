@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -289,8 +288,6 @@ public class LayerView extends FrameLayout {
         if (mRenderControllerThread != null) {
             throw new LayerViewException ("createGLThread() called with a GL thread already in place!");
         }
-
-        Log.e(LOGTAG, "### Creating GL thread!");
         mRenderControllerThread = new RenderControllerThread(mGLController);
         mRenderControllerThread.start();
         setListener(mRenderControllerThread);
@@ -299,7 +296,6 @@ public class LayerView extends FrameLayout {
 
     public synchronized Thread destroyGLThread() {
         // Wait for the GL thread to be started.
-        Log.e(LOGTAG, "### Waiting for GL thread to be created...");
         while (mRenderControllerThread == null) {
             try {
                 wait();
@@ -307,8 +303,6 @@ public class LayerView extends FrameLayout {
                 throw new RuntimeException(e);
             }
         }
-
-        Log.e(LOGTAG, "### Destroying GL thread!");
         Thread thread = mRenderControllerThread;
         mRenderControllerThread.shutdown();
         setListener(null);

@@ -1,5 +1,3 @@
-/* -*- tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
-
 package org.libreoffice.ui;
 
 import org.libreoffice.R;
@@ -11,13 +9,11 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 public class PageView extends View{
     private Bitmap bmp;
     private Paint mPaintBlack;
-    private static final String LOGTAG = "PageView";
 
     public PageView(Context context ) {
         super(context);
@@ -27,7 +23,6 @@ public class PageView extends View{
     public PageView(Context context, AttributeSet attrs) {
         super(context, attrs);
         bmp = BitmapFactory.decodeResource(getResources(), R.drawable.dummy_page);
-        Log.d(LOGTAG, bmp.toString());
         initialise();
     }
     public PageView(Context context, AttributeSet attrs, int defStyle) {
@@ -39,7 +34,6 @@ public class PageView extends View{
     private void initialise(){
         mPaintBlack = new Paint();
         mPaintBlack.setARGB(255, 0, 0, 0);
-        Log.d(LOGTAG, " Doing some set-up");
     }
 
     public void setBitmap(Bitmap bmp){

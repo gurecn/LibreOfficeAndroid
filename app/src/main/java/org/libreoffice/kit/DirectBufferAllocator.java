@@ -8,8 +8,6 @@ import java.nio.ByteBuffer;
  */
 public final class DirectBufferAllocator {
 
-    private static final String LOGTAG = DirectBufferAllocator.class.getSimpleName();
-
     private DirectBufferAllocator() {
     }
 
