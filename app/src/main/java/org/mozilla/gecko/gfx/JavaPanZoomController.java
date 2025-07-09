@@ -7,8 +7,8 @@ import android.view.GestureDetector;
 import android.view.InputDevice;
 import android.view.MotionEvent;
 import android.view.View;
+import org.libreoffice.callback.ZoomCallback;
 import org.libreoffice.manager.LOKitShell;
-import org.libreoffice.ui.MainActivity;
 import org.mozilla.gecko.ZoomConstraints;
 import org.mozilla.gecko.util.FloatUtils;
 import java.util.Timer;
@@ -63,7 +63,7 @@ public class JavaPanZoomController extends GestureDetector.SimpleOnGestureListen
     private final Axis mX;
     private final Axis mY;
     private final TouchEventHandler mTouchEventHandler;
-    private final MainActivity mContext;
+    private final ZoomCallback mCallback;
 
     /* The timer that handles flings or bounces. */
     private Timer mAnimationTimer;
@@ -78,8 +78,8 @@ public class JavaPanZoomController extends GestureDetector.SimpleOnGestureListen
     /* Whether or not to wait for a double-tap before dispatching a single-tap */
     private boolean mWaitForDoubleTap;
 
-    JavaPanZoomController(MainActivity context, PanZoomTarget target, View view) {
-        mContext = context;
+    public JavaPanZoomController(ZoomCallback callback, PanZoomTarget target, View view) {
+        mCallback = callback;
         PAN_THRESHOLD = 1/16f * LOKitShell.getDpi(view.getContext());
         MAX_SCROLL = 0.075f * LOKitShell.getDpi(view.getContext());
         mTarget = target;
@@ -247,7 +247,7 @@ public class JavaPanZoomController extends GestureDetector.SimpleOnGestureListen
     private void handleTouchMove(MotionEvent event) {
         if (mState == PanZoomState.PANNING_LOCKED || mState == PanZoomState.PANNING) {
             if (getVelocity() > 18.0f) {
-                mContext.hideSoftKeyboard();
+                mCallback.hideSoftKeyboard();
             }
         }
         switch (mState) {
@@ -649,11 +649,10 @@ public class JavaPanZoomController extends GestureDetector.SimpleOnGestureListen
                  */
                 float threshold = (overscrolled && !mSubscroller.scrolling() ? STOPPED_THRESHOLD : FLING_STOPPED_THRESHOLD);
                 if (getVelocity() >= threshold) {
-                    mContext.getDocumentOverlay().showPageNumberRect();
+                    mCallback.showPageNumberRect();
                     // we're still flinging
                     return;
                 }
-
                 mX.stopFling();
                 mY.stopFling();
             }
@@ -670,7 +669,7 @@ public class JavaPanZoomController extends GestureDetector.SimpleOnGestureListen
 
     private void finishAnimation() {
         stopAnimationTimer();
-        mContext.getDocumentOverlay().hidePageNumberRect();
+        mCallback.hidePageNumberRect();
         // Force a viewport synchronisation
         mTarget.forceRedraw();
     }
@@ -907,7 +906,7 @@ public class JavaPanZoomController extends GestureDetector.SimpleOnGestureListen
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        mContext.getDocumentOverlay().showPageNumberRect();
+//        mContext.getDocumentOverlay().showPageNumberRect();
         return super.onScroll(e1, e2, distanceX, distanceY);
     }
 

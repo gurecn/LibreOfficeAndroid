@@ -27,7 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
-
+import org.libreoffice.callback.ZoomCallback;
 import org.libreoffice.data.LOEvent;
 import org.libreoffice.manager.LOKitInputConnectionHandler;
 import org.libreoffice.manager.LOKitShell;
@@ -44,6 +44,7 @@ import org.libreoffice.overlay.CalcHeadersController;
 import org.libreoffice.overlay.DocumentOverlay;
 import org.libreoffice.utils.FileUtilities;
 import org.mozilla.gecko.gfx.GeckoLayerClient;
+import org.mozilla.gecko.gfx.JavaPanZoomController;
 import org.mozilla.gecko.gfx.LayerView;
 import java.io.File;
 import java.io.FileInputStream;
@@ -120,28 +121,35 @@ public class MainActivity extends AppCompatActivity implements SettingsListenerM
         hideBottomToolbar();
         mToolbarController = new ToolbarController(this, toolbarTop);
         mFormattingController = new FormattingController(this);
-        toolbarTop.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LOKitShell.sendNavigationClickEvent();
-            }
-        });
+        toolbarTop.setNavigationOnClickListener(view -> LOKitShell.sendNavigationClickEvent());
         mFontController = new FontController(this);
         loKitThread = new LOKitThread(this);
         loKitThread.start();
         mLayerClient = new GeckoLayerClient(this);
         LayerView layerView = findViewById(R.id.layer_view);
-        mLayerClient.setView(layerView);
+        ZoomCallback callback = new ZoomCallback() {
+            @Override
+            public void hideSoftKeyboard() {
+                getDocumentOverlay().hidePageNumberRect();
+            }
+            @Override
+            public void showPageNumberRect() {
+                getDocumentOverlay().showPageNumberRect();
+            }
+            @Override
+            public void hidePageNumberRect() {
+
+            }
+        };
+        JavaPanZoomController panZoomController =new JavaPanZoomController(callback, mLayerClient, layerView);
+        mLayerClient.setView(layerView, panZoomController);
         layerView.setInputConnectionHandler(new LOKitInputConnectionHandler());
         mLayerClient.notifyReady();
-        layerView.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if(!isReadOnlyMode() && keyEvent.getKeyCode() != KeyEvent.KEYCODE_BACK){
-                    setDocumentChanged(true);
-                }
-                return false;
+        layerView.setOnKeyListener((view, i, keyEvent) -> {
+            if(!isReadOnlyMode() && keyEvent.getKeyCode() != KeyEvent.KEYCODE_BACK){
+                setDocumentChanged(true);
             }
+            return false;
         });
         // create TextCursorLayer
         mDocumentOverlay = new DocumentOverlay(this, layerView);
