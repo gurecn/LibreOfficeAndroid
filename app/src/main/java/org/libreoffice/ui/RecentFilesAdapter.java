@@ -3,24 +3,27 @@ package org.libreoffice.ui;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import org.libreoffice.R;
+import org.libreoffice.callback.OnItemClickListener;
 import org.libreoffice.data.RecentFile;
 import org.libreoffice.utils.FileUtilities;
-
 import java.util.List;
 
 class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.ViewHolder> {
 
-    private final HomeActivity mActivity;
+    OnItemClickListener onItemClickListener;
+    private final Context mContext;
     private final List<RecentFile> recentFiles;
-    RecentFilesAdapter(HomeActivity activity, List<RecentFile> recentFiles) {
-        this.mActivity = activity;
+    RecentFilesAdapter(Context context, List<RecentFile> recentFiles, OnItemClickListener onItemClickListener) {
+        this.mContext = context;
         this.recentFiles = recentFiles;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -33,7 +36,7 @@ class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.ViewHol
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final RecentFile entry = recentFiles.get(position);
-        holder.itemView.setOnClickListener(view -> mActivity.openDocument(entry.getUri()));
+        holder.itemView.setOnClickListener(view -> onItemClickListener.onItemClick(view, position));
         final String filename = entry.getDisplayName();
         holder.textView.setText(filename);
         int compoundDrawableInt = switch (FileUtilities.getType(filename)) {
@@ -43,7 +46,7 @@ class RecentFilesAdapter extends RecyclerView.Adapter<RecentFilesAdapter.ViewHol
             case FileUtilities.PDF -> R.drawable.ic_pdf;
             default -> R.drawable.ic_writer;
         };
-        holder.imageView.setImageDrawable(ContextCompat.getDrawable(mActivity, compoundDrawableInt));
+        holder.imageView.setImageDrawable(ContextCompat.getDrawable(mContext, compoundDrawableInt));
     }
 
     @Override

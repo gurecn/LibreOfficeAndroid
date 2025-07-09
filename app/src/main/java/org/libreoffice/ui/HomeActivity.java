@@ -39,14 +39,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
-    public enum DocumentType {
-        WRITER,
-        CALC,
-        IMPRESS,
-        DRAW,
-        PDF,
-        INVALID
-    }
+    public enum DocumentType {WRITER, CALC, IMPRESS, DRAW, PDF, INVALID}
     public static final String EXPLORER_PREFS_KEY = "EXPLORER_PREFS";
     private static final String RECENT_DOCUMENTS_KEY = "RECENT_DOCUMENT_URIS";
     private static final String RECENT_DOCUMENTS_DELIMITER = " ";
@@ -173,7 +166,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         recentRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        recentRecyclerView.setAdapter(new RecentFilesAdapter(this, recentFiles));
+        RecentFilesAdapter adapter = new RecentFilesAdapter(this, recentFiles, (v, position) -> {
+            openDocument(recentFiles.get(position).getUri());
+        });
+        recentRecyclerView.setAdapter(adapter);
     }
 
     private void expandFabMenu() {
