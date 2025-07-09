@@ -8,12 +8,9 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
-
 import org.libreoffice.callback.ColorPaletteListener;
 import org.libreoffice.manager.LOKitShell;
-import org.libreoffice.ui.MainActivity;
 import org.libreoffice.R;
-
 
 public class ColorPaletteAdapter extends RecyclerView.Adapter<ColorPaletteAdapter.ColorPaletteViewHolder> {
 
@@ -58,7 +55,6 @@ public class ColorPaletteAdapter extends RecyclerView.Adapter<ColorPaletteAdapte
         holder.colorBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.setDocumentChanged(true);
                 setPosition(holder.getAdapterPosition());
             }
         });

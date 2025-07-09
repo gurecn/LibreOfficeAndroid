@@ -15,10 +15,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.lang.StrictMath;
 
-class JavaPanZoomController
-        extends GestureDetector.SimpleOnGestureListener
-        implements PanZoomController, SimpleScaleGestureDetector.SimpleScaleGestureListener
-{
+public class JavaPanZoomController extends GestureDetector.SimpleOnGestureListener implements SimpleScaleGestureDetector.SimpleScaleGestureListener {
     private static final String LOGTAG = "GeckoPanZoomController";
 
     // Animation stops if the velocity is below this value when overscrolled or panning.
@@ -449,9 +446,7 @@ class JavaPanZoomController
 
     private void fling() {
         updatePosition();
-
         stopAnimationTimer();
-
         boolean stopped = stopped();
         mX.startFling(stopped);
         mY.startFling(stopped);
@@ -639,17 +634,13 @@ class JavaPanZoomController
                 finishAnimation();
                 return;
             }
-
             /* Advance flings, if necessary. */
             boolean flingingX = mX.advanceFling();
             boolean flingingY = mY.advanceFling();
-
             boolean overscrolled = (mX.overscrolled() || mY.overscrolled());
-
             /* If we're still flinging in any direction, update the origin. */
             if (flingingX || flingingY) {
                 updatePosition();
-
                 /*
                  * Check to see if we're still flinging with an appreciable velocity. The threshold is
                  * higher in the case of overscroll, so we bounce back eagerly when overscrolling but
@@ -678,12 +669,8 @@ class JavaPanZoomController
     }
 
     private void finishAnimation() {
-        
-
         stopAnimationTimer();
-
         mContext.getDocumentOverlay().hidePageNumberRect();
-
         // Force a viewport synchronisation
         mTarget.forceRedraw();
     }

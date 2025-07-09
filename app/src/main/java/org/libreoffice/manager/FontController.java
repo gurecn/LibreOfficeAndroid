@@ -53,6 +53,7 @@ public class FontController implements AdapterView.OnItemSelectedListener {
     public final ColorPaletteListener colorPaletteListener = new ColorPaletteListener() {
         @Override
         public void applyColor(int color) {
+            MainActivity.setDocumentChanged(true);
             sendFontColorChange(color, false);
         }
 

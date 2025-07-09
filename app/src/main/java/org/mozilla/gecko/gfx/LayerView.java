@@ -17,7 +17,6 @@ import android.view.inputmethod.InputConnection;
 import android.widget.FrameLayout;
 import org.libreoffice.data.LOEvent;
 import org.libreoffice.manager.LOKitShell;
-import org.libreoffice.ui.MainActivity;
 import org.mozilla.gecko.OnInterceptTouchListener;
 import org.mozilla.gecko.OnSlideSwipeListener;
 
@@ -28,10 +27,9 @@ import org.mozilla.gecko.OnSlideSwipeListener;
  * mediator between the LayerRenderer and the LayerController.
  */
 public class LayerView extends FrameLayout {
-    private static final String LOGTAG = LayerView.class.getName();
 
     private GeckoLayerClient mLayerClient;
-    private PanZoomController mPanZoomController;
+    private JavaPanZoomController mPanZoomController;
     private final GLController mGLController;
     private InputConnectionHandler mInputConnectionHandler;
     private LayerRenderer mRenderer;
@@ -40,11 +38,9 @@ public class LayerView extends FrameLayout {
 
     private Listener mListener;
     private OnInterceptTouchListener mTouchIntercepter;
-    private final MainActivity mContext;
 
     public LayerView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext = (MainActivity) context;
 
         mSurfaceView = new SurfaceView(context);
         addView(mSurfaceView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -128,7 +124,7 @@ public class LayerView extends FrameLayout {
     }
 
     public GeckoLayerClient getLayerClient() { return mLayerClient; }
-    public PanZoomController getPanZoomController() { return mPanZoomController; }
+    public JavaPanZoomController getPanZoomController() { return mPanZoomController; }
 
     public ImmutableViewportMetrics getViewportMetrics() {
         return mLayerClient.getViewportMetrics();

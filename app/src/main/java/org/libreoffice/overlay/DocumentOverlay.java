@@ -2,7 +2,6 @@ package org.libreoffice.overlay;
 
 import android.graphics.RectF;
 import android.util.Log;
-
 import org.libreoffice.manager.LOKitShell;
 import org.libreoffice.ui.MainActivity;
 import org.libreoffice.R;
@@ -10,7 +9,6 @@ import org.libreoffice.canvas.SelectionHandle;
 import org.mozilla.gecko.gfx.Layer;
 import org.mozilla.gecko.gfx.LayerView;
 import org.mozilla.gecko.util.FloatUtils;
-
 import java.util.List;
 
 /**

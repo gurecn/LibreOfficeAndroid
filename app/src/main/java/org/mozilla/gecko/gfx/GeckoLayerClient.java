@@ -9,8 +9,6 @@ import org.mozilla.gecko.ZoomConstraints;
 import java.util.List;
 
 public class GeckoLayerClient implements PanZoomTarget {
-    private static final String LOGTAG = GeckoLayerClient.class.getSimpleName();
-
     private LayerRenderer mLayerRenderer;
 
     private final MainActivity mContext;
@@ -40,7 +38,7 @@ public class GeckoLayerClient implements PanZoomTarget {
 
     private boolean mIsReady;
 
-    private PanZoomController mPanZoomController;
+    private JavaPanZoomController mPanZoomController;
     private LayerView mView;
     private final DisplayPortCalculator mDisplayPortCalculator;
 
@@ -59,7 +57,7 @@ public class GeckoLayerClient implements PanZoomTarget {
 
     public void setView(LayerView view) {
         mView = view;
-        mPanZoomController = PanZoomController.Factory.create(mContext, this, view);
+        mPanZoomController =new JavaPanZoomController(mContext, this, view);
         mView.connect(this);
     }
 
@@ -122,7 +120,7 @@ public class GeckoLayerClient implements PanZoomTarget {
         sendResizeEventIfNecessary(forceResizeEvent);
     }
 
-    PanZoomController getPanZoomController() {
+    JavaPanZoomController getPanZoomController() {
         return mPanZoomController;
     }
 
