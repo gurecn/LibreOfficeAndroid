@@ -46,13 +46,11 @@ public class SearchController implements View.OnClickListener {
     private void search(String searchString, SearchDirection direction, float x, float y) {
         try {
             JSONObject rootJson = new JSONObject();
-
             addProperty(rootJson, "SearchItem.SearchString", "string", searchString);
             addProperty(rootJson, "SearchItem.Backward", "boolean", direction == SearchDirection.UP ? "true" : "false");
             addProperty(rootJson, "SearchItem.SearchStartPointX", "long", String.valueOf((long) UnitConverter.pixelToTwip(x, LOKitShell.getDpi(mActivity))));
             addProperty(rootJson, "SearchItem.SearchStartPointY", "long", String.valueOf((long) UnitConverter.pixelToTwip(y, LOKitShell.getDpi(mActivity))));
             addProperty(rootJson, "SearchItem.Command", "long", String.valueOf(0)); // search all == 1
-
             LOKitShell.sendEvent(new LOEvent(LOEvent.UNO_COMMAND, ".uno:ExecuteSearch", rootJson.toString()));
 
         } catch (JSONException e) {
@@ -70,14 +68,11 @@ public class SearchController implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         ImageButton button = (ImageButton) view;
-
         SearchDirection direction = SearchDirection.DOWN;
         if (button.getId() == R.id.button_search_up) {
             direction = SearchDirection.UP;
         }
-
         String searchText = ((EditText) mActivity.findViewById(R.id.search_string)).getText().toString();
-
         float x = mActivity.getCurrentCursorPosition().centerX();
         float y = mActivity.getCurrentCursorPosition().centerY();
         search(searchText, direction, x, y);

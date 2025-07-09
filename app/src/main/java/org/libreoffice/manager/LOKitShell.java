@@ -10,7 +10,7 @@ import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import org.libreoffice.data.LOEvent;
 import org.libreoffice.utils.ThumbnailCreator;
-import org.libreoffice.application.LibreOfficeApplication;
+import org.libreoffice.application.TheApplication;
 import org.libreoffice.canvas.SelectionHandle;
 import org.libreoffice.ui.MainActivity;
 import org.mozilla.gecko.gfx.ComposedTileLayer;
@@ -29,7 +29,7 @@ public class LOKitShell {
 
     // Get a Handler for the main java thread
     public static Handler getMainHandler() {
-        return LibreOfficeApplication.getMainHandler();
+        return TheApplication.getMainHandler();
     }
 
     public static void showProgressSpinner(final MainActivity context) {

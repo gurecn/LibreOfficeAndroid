@@ -13,9 +13,10 @@ import android.widget.PopupWindow;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.libreoffice.application.CustomConstant;
+import org.libreoffice.application.TheApplication;
 import org.libreoffice.data.LOEvent;
 import org.libreoffice.manager.LOKitShell;
-import org.libreoffice.ui.MainActivity;
 import org.libreoffice.canvas.CalcHeaderCell;
 import org.libreoffice.kit.Document;
 import org.mozilla.gecko.gfx.ImmutableViewportMetrics;
@@ -27,7 +28,6 @@ import java.util.Collections;
 import static org.libreoffice.manager.SearchController.addProperty;
 
 public class CalcHeadersView extends View {
-    private static final String LOGTAG = CalcHeadersView.class.getSimpleName();
 
     private boolean mInitialized;
     private LayerView mLayerView;
@@ -191,8 +191,8 @@ public class CalcHeadersView extends View {
     }
 
     public void showHeaderPopup(PointF point) {
-        if (mPopupWindow == null ||
-                !MainActivity.isExperimentalMode()) return;
+        boolean isExperimentalMode = TheApplication.getSPManager().getBoolean(CustomConstant.ENABLE_EXPERIMENTAL_PREFS_KEY, false);
+        if (mPopupWindow == null || !isExperimentalMode) return;
         if (mIsRow) {
             mPopupWindow.showAsDropDown(this, getWidth()*3/2, -getHeight()+(int)point.y);
         } else {

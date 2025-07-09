@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.libreoffice.application.TheApplication;
 import org.libreoffice.data.LOEvent;
 import org.libreoffice.adapter.PDFDocumentAdapter;
 import org.libreoffice.R;
@@ -52,7 +53,7 @@ public class LOKitTileProvider implements TileProvider {
     public LOKitTileProvider(MainActivity context, InvalidationHandler messageCallback, String input) {
         mContext = context;
         mMessageCallback = messageCallback;
-        LibreOfficeKit.init(mContext);
+        LibreOfficeKit.init();
         mOffice = new Office(LibreOfficeKit.getLibreOfficeKitHandle());
         mOffice.setMessageCallback(messageCallback);
         mOffice.setOptionalFeatures(Document.LOK_FEATURE_DOCUMENT_PASSWORD);
@@ -69,7 +70,7 @@ public class LOKitTileProvider implements TileProvider {
             mOffice.setOptionalFeatures(Document.LOK_FEATURE_DOCUMENT_PASSWORD);
             mDocument = mOffice.documentLoad((new File(fileToBeEncoded.getParent(),encodedFileName)).getPath());
         }
-        mDPI = LOKitShell.getDpi(mContext);
+        mDPI = LOKitShell.getDpi(TheApplication.getContext());
         mTileWidth = pixelToTwip(TILE_SIZE, mDPI);
         mTileHeight = pixelToTwip(TILE_SIZE, mDPI);
 

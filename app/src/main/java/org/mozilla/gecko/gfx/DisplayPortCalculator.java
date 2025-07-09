@@ -4,12 +4,9 @@ import android.content.Context;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.Log;
-
 import org.json.JSONArray;
 import org.libreoffice.manager.LOKitShell;
-import org.libreoffice.ui.MainActivity;
 import org.mozilla.gecko.util.FloatUtils;
-
 import java.util.Map;
 
 final class DisplayPortCalculator {

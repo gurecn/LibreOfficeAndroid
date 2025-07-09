@@ -10,7 +10,6 @@ import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.snackbar.Snackbar;
@@ -27,6 +26,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.Toast;
+import org.libreoffice.application.CustomConstant;
+import org.libreoffice.application.TheApplication;
 import org.libreoffice.callback.ZoomCallback;
 import org.libreoffice.data.LOEvent;
 import org.libreoffice.manager.LOKitInputConnectionHandler;
@@ -62,9 +63,6 @@ import java.util.UUID;
  */
 public class MainActivity extends AppCompatActivity implements SettingsListenerModel.OnSettingsPreferenceChangedListener {
 
-    private static final String LOGTAG = "LibreOfficeMainActivity";
-    public static final String ENABLE_EXPERIMENTAL_PREFS_KEY = "ENABLE_EXPERIMENTAL";
-    private static final String ENABLE_DEVELOPER_PREFS_KEY = "ENABLE_DEVELOPER";
     private static final int REQUEST_CODE_SAVEAS = 12345;
     private static final int REQUEST_CODE_EXPORT_TO_PDF = 12346;
     public static LOKitThread loKitThread;
@@ -238,9 +236,8 @@ public class MainActivity extends AppCompatActivity implements SettingsListenerM
     }
 
     private void updatePreferences() {
-        SharedPreferences sPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        mIsExperimentalMode =  sPrefs.getBoolean(ENABLE_EXPERIMENTAL_PREFS_KEY, false);
-        mIsDeveloperMode = mIsExperimentalMode && sPrefs.getBoolean(ENABLE_DEVELOPER_PREFS_KEY, false);
+        mIsExperimentalMode = TheApplication.getSPManager().getBoolean(CustomConstant.ENABLE_EXPERIMENTAL_PREFS_KEY, false);
+        mIsDeveloperMode = mIsExperimentalMode && TheApplication.getSPManager().getBoolean(CustomConstant.ENABLE_DEVELOPER_PREFS_KEY, false);
     }
 
     // Loads a new Document and saves it to a temporary file
@@ -714,8 +711,8 @@ public class MainActivity extends AppCompatActivity implements SettingsListenerM
 
     @Override
     public void settingsPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.matches(ENABLE_EXPERIMENTAL_PREFS_KEY)) {
-            mIsExperimentalMode = sharedPreferences.getBoolean(ENABLE_EXPERIMENTAL_PREFS_KEY, false);
+        if (key.matches(CustomConstant.ENABLE_EXPERIMENTAL_PREFS_KEY)) {
+            mIsExperimentalMode = sharedPreferences.getBoolean(CustomConstant.ENABLE_EXPERIMENTAL_PREFS_KEY, false);
         }
     }
 

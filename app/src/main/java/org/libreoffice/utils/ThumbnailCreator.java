@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import org.libreoffice.TileProvider;
-import org.libreoffice.application.LibreOfficeApplication;
+import org.libreoffice.application.TheApplication;
 import org.libreoffice.manager.LOKitShell;
 
 import java.lang.ref.WeakReference;
@@ -103,7 +103,7 @@ public class ThumbnailCreator {
 
         public void applyBitmap(final Bitmap bitmap) {
             // run on UI thread
-            LibreOfficeApplication.getMainHandler().post(new Runnable() {
+            TheApplication.getMainHandler().post(new Runnable() {
                 @Override
                 public void run() {
                     changeBitmap(bitmap);

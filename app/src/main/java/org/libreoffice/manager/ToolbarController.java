@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 import org.libreoffice.R;
+import org.libreoffice.application.CustomConstant;
+import org.libreoffice.application.TheApplication;
 import org.libreoffice.data.LOEvent;
 import org.libreoffice.ui.MainActivity;
 
@@ -227,7 +229,8 @@ public class ToolbarController implements Toolbar.OnMenuItemClickListener {
     }
 
     public void setupToolbars() {
-        if (MainActivity.isExperimentalMode()) {
+        boolean isExperimentalMode = TheApplication.getSPManager().getBoolean(CustomConstant.ENABLE_EXPERIMENTAL_PREFS_KEY, false);
+        if (isExperimentalMode) {
             boolean enableSaveEntry = !MainActivity.isReadOnlyMode() && mContext.hasLocationForSave();
             enableMenuItem(R.id.action_save, enableSaveEntry);
             if (MainActivity.isReadOnlyMode()) {

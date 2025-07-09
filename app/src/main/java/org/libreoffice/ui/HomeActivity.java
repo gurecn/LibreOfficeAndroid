@@ -32,6 +32,8 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import org.libreoffice.R;
+import org.libreoffice.application.CustomConstant;
+import org.libreoffice.application.TheApplication;
 import org.libreoffice.data.RecentFile;
 import org.libreoffice.utils.FileUtilities;
 import java.util.ArrayList;
@@ -136,8 +138,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void createUI() {
         editFAB = findViewById(R.id.editFAB);
         editFAB.setOnClickListener(this);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final boolean bEditingEnabled = preferences.getBoolean(MainActivity.ENABLE_EXPERIMENTAL_PREFS_KEY, false);
+        final boolean bEditingEnabled = TheApplication.getSPManager().getBoolean(CustomConstant.ENABLE_EXPERIMENTAL_PREFS_KEY, false);
         editFAB.setVisibility(bEditingEnabled ? View.VISIBLE : View.INVISIBLE);
         impressFAB = findViewById(R.id.newImpressFAB);
         impressFAB.setOnClickListener(this);

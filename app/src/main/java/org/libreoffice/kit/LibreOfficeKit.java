@@ -1,8 +1,10 @@
 package org.libreoffice.kit;
 
-import android.app.Activity;
 import android.content.pm.ApplicationInfo;
 import android.content.res.AssetManager;
+
+import org.libreoffice.application.TheApplication;
+
 import java.nio.ByteBuffer;
 
 public final class LibreOfficeKit {
@@ -32,21 +34,16 @@ public final class LibreOfficeKit {
 
     // This init() method should be called from the upper Java level of
     // LO-based apps.
-    public static synchronized void init(Activity activity)
-    {
+    public static synchronized void init() {
         if (initializeDone) {
             return;
         }
-
-        mgr = activity.getResources().getAssets();
-
-        ApplicationInfo applicationInfo = activity.getApplicationInfo();
+        mgr = TheApplication.getContext().getResources().getAssets();
+        ApplicationInfo applicationInfo = TheApplication.getContext().getApplicationInfo();
         String dataDir = applicationInfo.dataDir;
         redirectStdio(true);
-
-        String cacheDir = activity.getApplication().getCacheDir().getAbsolutePath();
-        String apkFile = activity.getApplication().getPackageResourcePath();
-
+        String cacheDir = TheApplication.getApplication().getCacheDir().getAbsolutePath();
+        String apkFile = TheApplication.getApplication().getPackageResourcePath();
         if (!initializeNative(dataDir, cacheDir, apkFile, mgr)) {
             return;
         }
